@@ -1,0 +1,436 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}Store Owner Dashboard - Esugo Grocery{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-4 gap-3">
+        <div>
+            <h1 class="mb-1"><i class="bi bi-shop me-2"></i>Store Owner Dashboard</h1>
+            <p class="text-muted mb-0">Manage your store, upload products, and keep your operating details current.</p>
+        </div>
+        <a href="{% url 'home' %}" class="btn btn-outline-success">
+            <i class="bi bi-house-door me-2"></i>View Storefront
+        </a>
+    </div>
+
+    <ul class="nav nav-pills mb-4">
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab == 'home' %}active{% endif %}" href="{% url 'store_owner_dashboard' %}?tab=home">
+                <i class="bi bi-house-door me-1"></i>Home
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab == 'upload' %}active{% endif %}" href="{% url 'store_owner_dashboard' %}?tab=upload">
+                <i class="bi bi-cloud-upload me-1"></i>Upload Product
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab == 'settings' %}active{% endif %}" href="{% url 'store_owner_dashboard' %}?tab=settings">
+                <i class="bi bi-gear me-1"></i>Settings
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab == 'orders' %}active{% endif %}" href="{% url 'store_owner_dashboard' %}?tab=orders">
+                <i class="bi bi-receipt me-1"></i>Orders
+                {% if pending_store_orders_count %}
+                <span class="badge bg-warning text-dark ms-1">{{ pending_store_orders_count }}</span>
+                {% endif %}
+            </a>
+        </li>
+    </ul>
+
+    {% if active_tab == 'upload' %}
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-cloud-upload me-2"></i>Upload Product</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="product">
+
+                {% if product_form.errors %}
+                <div class="alert alert-danger">
+                    Please check the product details below.
+                </div>
+                {% endif %}
+
+                <div class="row">
+                    {% if is_main_store_owner %}
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="product_store_owner">Store for this product</label>
+                        <select name="product_store_owner" id="product_store_owner" class="form-select" required>
+                            <option value="">Choose store</option>
+                            {% for store in upload_store_settings %}
+                            <option value="{{ store.owner.id }}">
+                                {{ store.store_name }}{% if store.location %} - {{ store.location|truncatechars:60 }}{% endif %}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-text">This product will appear only under the selected store.</div>
+                    </div>
+                    {% else %}
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Store for this product</label>
+                        <input type="text" class="form-control" value="{{ store_settings.store_name }}" disabled>
+                        <div class="form-text">Products you upload are assigned to your store.</div>
+                    </div>
+                    {% endif %}
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="{{ product_form.name.id_for_label }}">Product Name</label>
+                        {{ product_form.name }}
+                        {{ product_form.name.errors }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="{{ product_form.slug.id_for_label }}">Slug</label>
+                        {{ product_form.slug }}
+                        <div class="form-text">Use lowercase words separated by hyphens.</div>
+                        {{ product_form.slug.errors }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="{{ product_form.category.id_for_label }}">Category</label>
+                        {{ product_form.category }}
+                        {{ product_form.category.errors }}
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="{{ product_form.price.id_for_label }}">Price</label>
+                        {{ product_form.price }}
+                        {{ product_form.price.errors }}
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="{{ product_form.stock.id_for_label }}">Stock</label>
+                        {{ product_form.stock }}
+                        {{ product_form.stock.errors }}
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="{{ product_form.description.id_for_label }}">Description</label>
+                        {{ product_form.description }}
+                        {{ product_form.description.errors }}
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label class="form-label" for="{{ product_form.image.id_for_label }}">Product Image</label>
+                        {{ product_form.image }}
+                        {{ product_form.image.errors }}
+                    </div>
+                    <div class="col-md-4 mb-3 d-flex align-items-end">
+                        <div class="form-check pb-2">
+                            {{ product_form.is_available }}
+                            <label class="form-check-label" for="{{ product_form.is_available.id_for_label }}">Available for customers</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-plus-circle me-2"></i>Upload Product
+                </button>
+            </form>
+        </div>
+    </div>
+    {% elif active_tab == 'settings' %}
+    {% if is_main_store_owner %}
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-geo-alt me-2"></i>Locations and Opening Hours Per Store</h5>
+        </div>
+        <div class="card-body">
+            {% if editable_store_settings %}
+            <div class="vstack gap-3">
+                {% for store in editable_store_settings %}
+                <form method="POST" class="border rounded p-3">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="branch_settings">
+                    <input type="hidden" name="store_settings_id" value="{{ store.id }}">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-lg-3">
+                            <div class="fw-semibold">{{ store.store_name }}</div>
+                            <div class="small text-muted">{{ store.owner.username }}</div>
+                        </div>
+                        <div class="col-lg-4">
+                            <label class="form-label">Location</label>
+                            <textarea name="location" class="form-control" rows="2" placeholder="Store address or delivery coverage area">{{ store.location }}</textarea>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-label">Opening Hours</label>
+                            <input type="text" name="opening_hours" class="form-control" value="{{ store.opening_hours }}" placeholder="Example: 8:00 AM - 8:00 PM">
+                        </div>
+                        <div class="col-lg-2">
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="bi bi-save me-1"></i>Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-muted mb-0">No branch store settings found.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% elif active_tab == 'orders' %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-hourglass-split me-2"></i>Orders Waiting for Your Decision</h5>
+        </div>
+        <div class="card-body">
+            {% if pending_store_orders %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Order #</th>
+                            <th>Store</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>Decision</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in pending_store_orders %}
+                        <tr>
+                            <td><strong>{{ order.order_number }}</strong></td>
+                            <td>
+                                {% if order.store_owner and order.store_owner.store_settings %}
+                                {{ order.store_owner.store_settings.store_name }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>{{ order.user.first_name|default:order.user.username }} {{ order.user.last_name }}</td>
+                            <td>
+                                {% for item in order.items.all %}
+                                <div>{{ item.quantity }} x {{ item.product.name }}</div>
+                                {% endfor %}
+                            </td>
+                            <td>{{ order.total_amount }}</td>
+                            <td>{{ order.created_at|date:"M d, Y H:i" }}</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <form method="POST" action="{% url 'store_owner_update_order' order.order_number %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="accept">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="bi bi-check-circle me-1"></i>Accept
+                                        </button>
+                                    </form>
+                                    <form method="POST" action="{% url 'store_owner_update_order' order.order_number %}" onsubmit="return confirm('Decline order {{ order.order_number }}?');">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="decline">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-x-circle me-1"></i>Decline
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-muted mb-0">No orders are waiting for your decision.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Recent Store Orders</h5>
+        </div>
+        <div class="card-body">
+            {% if recent_store_orders %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Order #</th>
+                            <th>Store</th>
+                            <th>Customer</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in recent_store_orders %}
+                        <tr>
+                            <td><strong>{{ order.order_number }}</strong></td>
+                            <td>
+                                {% if order.store_owner and order.store_owner.store_settings %}
+                                {{ order.store_owner.store_settings.store_name }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>{{ order.user.first_name|default:order.user.username }} {{ order.user.last_name }}</td>
+                            <td>
+                                <span class="badge {% if order.status == 'pending' %}bg-secondary{% elif order.status == 'confirmed' %}bg-info{% elif order.status == 'cancelled' %}bg-danger{% elif order.status == 'delivered' %}bg-success{% else %}bg-warning{% endif %}">
+                                    {{ order.get_status_display }}
+                                </span>
+                            </td>
+                            <td>{{ order.total_amount }}</td>
+                            <td>{{ order.created_at|date:"M d, Y H:i" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-muted mb-0">No store orders yet.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <a href="{% url 'store_owner_dashboard' %}?tab=home&product_filter=all" class="text-decoration-none">
+            <div class="card bg-success text-white h-100 {% if product_filter == 'all' %}border border-3 border-dark{% endif %}">
+                <div class="card-body d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Total Products</h6>
+                        <h3 class="mb-0">{{ total_products }}</h3>
+                    </div>
+                    <i class="bi bi-box-seam fs-1"></i>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="col-md-3 mb-3">
+            <a href="{% url 'store_owner_dashboard' %}?tab=home&product_filter=available" class="text-decoration-none">
+            <div class="card bg-primary text-white h-100 {% if product_filter == 'available' %}border border-3 border-dark{% endif %}">
+                <div class="card-body d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Available</h6>
+                        <h3 class="mb-0">{{ available_products }}</h3>
+                    </div>
+                    <i class="bi bi-check-circle fs-1"></i>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="col-md-3 mb-3">
+            <a href="{% url 'store_owner_dashboard' %}?tab=home&product_filter=low_stock" class="text-decoration-none">
+            <div class="card bg-warning text-dark h-100 {% if product_filter == 'low_stock' %}border border-3 border-dark{% endif %}">
+                <div class="card-body d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Low Stock</h6>
+                        <h3 class="mb-0">{{ low_stock_count }}</h3>
+                    </div>
+                    <i class="bi bi-exclamation-triangle fs-1"></i>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="col-md-3 mb-3">
+            <a href="{% url 'store_owner_dashboard' %}?tab=home&product_filter=out_of_stock" class="text-decoration-none">
+            <div class="card bg-danger text-white h-100 {% if product_filter == 'out_of_stock' %}border border-3 border-dark{% endif %}">
+                <div class="card-body d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Out of Stock</h6>
+                        <h3 class="mb-0">{{ out_of_stock_count }}</h3>
+                    </div>
+                    <i class="bi bi-x-circle fs-1"></i>
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ product_filter_label }}</h5>
+                    <a href="{% url 'store_owner_dashboard' %}?tab=upload" class="btn btn-success btn-sm">
+                        <i class="bi bi-plus-circle me-1"></i>Add Product
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if recent_products %}
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    {% if is_main_store_owner %}
+                                    <th>Store</th>
+                                    {% endif %}
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in recent_products %}
+                                <tr>
+                                    <td><strong>{{ product.name }}</strong></td>
+                                    {% if is_main_store_owner %}
+                                    <td>
+                                        {% if product.owner and product.owner.store_settings %}
+                                        {{ product.owner.store_settings.store_name }}
+                                        {% else %}
+                                        <span class="text-muted">No store</span>
+                                        {% endif %}
+                                    </td>
+                                    {% endif %}
+                                    <td>{{ product.category.name }}</td>
+                                    <td>{{ product.price }}</td>
+                                    <td>{{ product.stock }}</td>
+                                    <td>
+                                        {% if product.is_available %}
+                                        <span class="badge bg-success">Available</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary">Hidden</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="{% url 'store_owner_delete_product' product.id %}" onsubmit="return confirm('Delete {{ product.name|escapejs }}? This cannot be undone.');">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-trash me-1"></i>Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-muted mb-0">No products found for this filter.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Store Details</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2"><strong>Name:</strong> {{ store_settings.store_name }}</p>
+                    <p class="mb-2"><strong>Location:</strong> {{ store_settings.location|default:"Not set yet" }}</p>
+                    <p class="mb-0"><strong>Opening Hours:</strong> {{ store_settings.opening_hours|default:"Not set yet" }}</p>
+                </div>
+            </div>
+            <div class="d-grid gap-2">
+                <a href="{% url 'store_owner_dashboard' %}?tab=upload" class="btn btn-success">
+                    <i class="bi bi-cloud-upload me-2"></i>Upload Product
+                </a>
+                <a href="{% url 'store_owner_dashboard' %}?tab=settings" class="btn btn-outline-success">
+                    <i class="bi bi-gear me-2"></i>Update Settings
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

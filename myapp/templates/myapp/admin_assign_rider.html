@@ -1,0 +1,62 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}Assign Rider - Order {{ order.order_number }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-bicycle me-2"></i>Assign Rider to Order</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6>Order Details</h6>
+                        <p class="mb-1"><strong>Order #:</strong> {{ order.order_number }}</p>
+                        <p class="mb-1"><strong>Customer:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+                        <p class="mb-1"><strong>Status:</strong> 
+                            <span class="badge bg-warning">{{ order.get_status_display }}</span>
+                        </p>
+                        <p class="mb-0"><strong>Address:</strong> {{ order.address }}, {{ order.city }}</p>
+                    </div>
+
+                    {% if riders %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="rider" class="form-label">Select Rider</label>
+                            <select name="rider" id="rider" class="form-select" required>
+                                <option value="">-- Select a Rider --</option>
+                                {% for rider in riders %}
+                                <option value="{{ rider.id }}">
+                                    {{ rider.first_name }} {{ rider.last_name }} ({{ rider.email }})
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-1"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-1"></i>Assign Rider
+                            </button>
+                        </div>
+                    </form>
+                    {% else %}
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        No riders available. Please register some riders first.
+                    </div>
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

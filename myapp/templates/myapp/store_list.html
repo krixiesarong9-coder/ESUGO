@@ -1,0 +1,54 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}Choose Store - Esugo Grocery{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-1"><i class="bi bi-shop me-2 text-success"></i>Choose Your Preferred Store</h2>
+            <p class="text-muted mb-0">Select a store to browse products available from that seller.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for store in stores %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex align-items-start justify-content-between mb-3">
+                        <div>
+                            <h5 class="card-title mb-1">{{ store.store_name }}</h5>
+                            <span class="badge bg-success-subtle text-success">
+                                {{ store.available_products }} product{{ store.available_products|pluralize }}
+                            </span>
+                        </div>
+                        <i class="bi bi-shop-window fs-3 text-success"></i>
+                    </div>
+
+                    <p class="card-text text-muted mb-2">
+                        <i class="bi bi-geo-alt me-1"></i>
+                        {{ store.location|default:"Location not set yet" }}
+                    </p>
+                    <p class="card-text text-muted mb-4">
+                        <i class="bi bi-clock me-1"></i>
+                        {{ store.opening_hours|default:"Opening hours not set yet" }}
+                    </p>
+
+                    <a href="{% url 'product_list' %}?store={{ store.owner.id }}" class="btn btn-success mt-auto">
+                        Choose This Store
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                <i class="bi bi-info-circle me-2"></i>No stores are available yet.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

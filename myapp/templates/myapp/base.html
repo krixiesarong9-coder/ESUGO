@@ -1,0 +1,391 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Esugo Grocery{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="{% url 'home' %}">
+                <img src="{% static 'logo.png' %}" alt="Esugo Grocery" style="height: 60px; width: 60px; margin-right: 10px; border-radius: 50%; background: transparent;">Esugo Grocery
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    {% if user_profile.user_type == 'customer' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store_list' %}">Choose Store</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'order_history' %}">My Orders</a>
+                    </li>
+                    {% endif %}
+                    {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+                    </li>
+                    {% endif %}
+                    {% if user_profile.user_type == 'store_owner' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store_owner_dashboard' %}">Store Owner Dashboard</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="contactDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-telephone me-1"></i>Contact Us
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="tel:+631234567890"><i class="bi bi-telephone me-2"></i>(123) 456-7890</a></li>
+                            <li><a class="dropdown-item" href="mailto:info@esugo.com"><i class="bi bi-envelope me-2"></i>info@esugo.com</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+                
+                <!-- Search Form -->
+                <form class="d-flex me-3" action="{% url 'product_list' %}" method="GET">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Search products..." aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+                
+                <!-- User Menu -->
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle me-1"></i>{{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            {% if user_profile.user_type == 'rider' %}
+                            <li><a class="dropdown-item" href="{% url 'rider_dashboard' %}">Dashboard</a></li>
+                            {% endif %}
+                            {% if user_profile.user_type == 'store_owner' %}
+                            <li><a class="dropdown-item" href="{% url 'store_owner_dashboard' %}">Dashboard</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                            {% if user_profile.user_type == 'customer' %}
+                            <li><a class="dropdown-item" href="{% url 'order_history' %}">Orders</a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light btn-sm ms-lg-2 my-1" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="bi bi-person me-1"></i>Login
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-light btn-sm text-success ms-lg-2 my-1" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">
+                            <i class="bi bi-person-plus me-1"></i>Sign Up
+                        </button>
+                    </li>
+                    {% endif %}
+                    
+                    <!-- Cart Icon -->
+                    {% if user.is_authenticated and user_profile.user_type == 'customer' and not user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cart' %}">
+                            <i class="bi bi-cart-fill me-1"></i>Cart
+                            {% if user.is_authenticated and cart %}
+                            <span class="badge bg-warning text-dark">{{ cart.get_item_count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% if not user.is_authenticated %}
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="loginModalLabel">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{% url 'login' %}" novalidate>
+                    {% csrf_token %}
+                    <div class="modal-body p-4">
+                        <div class="text-center mb-4">
+                            <img src="{% static 'logo.png' %}" alt="Esugo Grocery" class="img-fluid mb-2" style="max-width: 90px; border-radius: 50%; background: transparent;">
+                            <p class="text-muted mb-0">Sign in to your account</p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modal_login_username" class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" id="modal_login_username" placeholder="Enter your username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modal_login_password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" name="password" class="form-control" id="modal_login_password" placeholder="Enter your password" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="toggleModalLoginPassword()" aria-label="Show or hide password">
+                                    <i class="bi bi-eye" id="modalLoginPasswordIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer flex-column align-items-stretch border-0 pt-0 px-4 pb-4">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                        </button>
+                        <p class="text-center text-muted small mb-0 mt-3">
+                            Don't have an account?
+                            <button class="btn btn-link btn-sm text-success text-decoration-none p-0 align-baseline" type="button" data-bs-target="#signupModal" data-bs-toggle="modal">Sign up</button>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <form method="POST" action="{% url 'register' %}" class="modal-content border-0 shadow signup-modal-form" novalidate>
+                {% csrf_token %}
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="signupModalLabel">
+                        <i class="bi bi-person-plus me-2"></i>Sign Up
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <input type="hidden" name="registration_source" value="modal">
+                <div class="modal-body p-4">
+                    <div class="text-center mb-4">
+                        <img src="{% static 'logo.png' %}" alt="Esugo Grocery" class="img-fluid mb-2" style="max-width: 90px; border-radius: 50%; background: transparent;">
+                        <p class="text-muted mb-0">Create your Esugo Grocery account</p>
+                    </div>
+                    {% if register_errors %}
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-circle me-2"></i>
+                        <ul class="mb-0">
+                            {% for error in register_errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="modal_first_name" class="form-label">First Name *</label>
+                            <input type="text" name="first_name" class="form-control" id="modal_first_name" placeholder="First name" value="{{ register_data.first_name }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="modal_last_name" class="form-label">Last Name *</label>
+                            <input type="text" name="last_name" class="form-control" id="modal_last_name" placeholder="Last name" value="{{ register_data.last_name }}" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal_signup_username" class="form-label">Username *</label>
+                        <input type="text" name="username" class="form-control" id="modal_signup_username" placeholder="Choose a username" value="{{ register_data.username }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal_email" class="form-label">Email Address *</label>
+                        <input type="email" name="email" class="form-control" id="modal_email" placeholder="your@email.com" value="{{ register_data.email }}" required>
+                        <div class="form-text text-danger d-none" id="modal_email_validation">Please enter an email with @ and a domain, like your@email.com.</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="modal_password1" class="form-label">Password *</label>
+                            <div class="input-group">
+                                <input type="password" name="password1" class="form-control" id="modal_password1" placeholder="Create a password" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('modal_password1', 'modalPasswordIcon1')" aria-label="Show password">
+                                    <i class="bi bi-eye" id="modalPasswordIcon1"></i>
+                                </button>
+                            </div>
+                            <div class="form-text">Use at least 8 characters.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="modal_password2" class="form-label">Confirm Password *</label>
+                            <div class="input-group">
+                                <input type="password" name="password2" class="form-control" id="modal_password2" placeholder="Confirm password" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('modal_password2', 'modalPasswordIcon2')" aria-label="Show confirm password">
+                                    <i class="bi bi-eye" id="modalPasswordIcon2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">I want to register as *</label>
+                        <div class="row g-2">
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="user_type" id="modal_user_type_customer" value="customer" {% if register_data.user_type == 'customer' or not register_data.user_type %}checked{% endif %}>
+                                    <label class="form-check-label" for="modal_user_type_customer">
+                                        <i class="bi bi-person me-1"></i>Customer
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="user_type" id="modal_user_type_rider" value="rider" {% if register_data.user_type == 'rider' %}checked{% endif %}>
+                                    <label class="form-check-label" for="modal_user_type_rider">
+                                        <i class="bi bi-bicycle me-1"></i>Rider
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="user_type" id="modal_user_type_store_owner" value="store_owner" {% if register_data.user_type == 'store_owner' %}checked{% endif %}>
+                                    <label class="form-check-label" for="modal_user_type_store_owner">
+                                        <i class="bi bi-shop me-1"></i>Store Owner
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="user_type" id="modal_user_type_admin" value="admin" {% if register_data.user_type == 'admin' %}checked{% endif %}>
+                                    <label class="form-check-label" for="modal_user_type_admin">
+                                        <i class="bi bi-shield-check me-1"></i>Admin
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer flex-column align-items-stretch border-0 pt-0 px-4 pb-4">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-person-plus me-2"></i>Create Account
+                    </button>
+                    <p class="text-center text-muted small mb-0 mt-3">
+                        Already have an account?
+                        <button class="btn btn-link btn-sm text-success text-decoration-none p-0 align-baseline" type="button" data-bs-target="#loginModal" data-bs-toggle="modal">Login</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        function toggleModalLoginPassword() {
+            const passwordInput = document.getElementById('modal_login_password');
+            const toggleIcon = document.getElementById('modalLoginPasswordIcon');
+
+            if (!passwordInput || !toggleIcon) {
+                return;
+            }
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('bi-eye');
+                toggleIcon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('bi-eye-slash');
+                toggleIcon.classList.add('bi-eye');
+            }
+        }
+
+        function togglePassword(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = document.getElementById(iconId);
+
+            if (!passwordInput || !toggleIcon) {
+                return;
+            }
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('bi-eye');
+                toggleIcon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('bi-eye-slash');
+                toggleIcon.classList.add('bi-eye');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const signupForm = document.querySelector('.signup-modal-form');
+            const emailInput = document.getElementById('modal_email');
+            const emailValidation = document.getElementById('modal_email_validation');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!signupForm || !emailInput || !emailValidation) {
+                return;
+            }
+
+            function validateEmail(showMessage) {
+                const isValid = emailPattern.test(emailInput.value.trim());
+                emailValidation.classList.toggle('d-none', !showMessage || isValid);
+                return isValid;
+            }
+
+            emailInput.addEventListener('input', function () {
+                validateEmail(emailInput.value.trim() !== '');
+            });
+
+            signupForm.addEventListener('submit', function (event) {
+                if (!validateEmail(true)) {
+                    event.preventDefault();
+                    emailInput.focus();
+                }
+            });
+        });
+
+    </script>
+    {% if open_auth_modal %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modalId = '{{ open_auth_modal }}' === 'signup' ? 'signupModal' : 'loginModal';
+            const modalElement = document.getElementById(modalId);
+            if (modalElement) {
+                bootstrap.Modal.getOrCreateInstance(modalElement).show();
+            }
+        });
+    </script>
+    {% endif %}
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

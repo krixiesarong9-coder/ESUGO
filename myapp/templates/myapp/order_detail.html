@@ -1,0 +1,198 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}Order {{ order.order_number }} - Esugo Grocery{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <i class="bi bi-check-circle-fill text-success display-1"></i>
+                <h1 class="mt-3">Order Placed Successfully!</h1>
+                <p class="lead">Thank you for your order. We'll send you a confirmation email shortly.</p>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Order Number</h5>
+                            <p class="fs-5 fw-bold">{{ order.order_number }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Order Date</h5>
+                            <p class="fs-5">{{ order.created_at|date:"M d, Y H:i" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Order Status</h5>
+                    <div class="d-flex align-items-center flex-wrap gap-2">
+                        <span class="badge {% if order.status == 'delivered' %}bg-success{% elif order.status == 'cancelled' %}bg-danger{% elif order.status == 'out_for_delivery' %}bg-info{% else %}bg-warning{% endif %} fs-6 me-2">
+                            {{ order.get_status_display }}
+                        </span>
+                        <span class="text-muted">
+                            Payment:
+                            {% if order.payment_method == 'cod' and order.payment_status != 'paid' %}
+                                Cash on Delivery
+                            {% else %}
+                                {{ order.get_payment_status_display }}
+                            {% endif %}
+                        </span>
+
+                        {% if can_pay_order %}
+                        <a href="{% url 'pay_order' order.order_number %}" class="btn btn-primary btn-sm ms-2">
+                            <i class="bi bi-credit-card me-1"></i>
+                            Pay Now
+                        </a>
+                        {% endif %}
+
+                        {% if order.store_owner and order.store_owner.store_settings %}
+                        <span class="text-muted">| Store: {{ order.store_owner.store_settings.store_name }}</span>
+                        {% endif %}
+
+                        {% if order.delivered_at %}
+                        <span class="text-muted">| Delivered: {{ order.delivered_at|date:"M d, Y H:i" }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% if can_store_owner_decide %}
+            <div class="card mb-4 border-success">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-shop me-2"></i>Store Owner Decision</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-3">This order is assigned to your store. Accept it to make it available for rider assignment, or decline it if you cannot fulfill it.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <form method="POST" action="{% url 'store_owner_update_order' order.order_number %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="accept">
+                            <input type="hidden" name="next" value="order_detail">
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-circle me-1"></i>Accept Order
+                            </button>
+                        </form>
+                        <form method="POST" action="{% url 'store_owner_update_order' order.order_number %}" onsubmit="return confirm('Decline order {{ order.order_number }}?');">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="decline">
+                            <input type="hidden" name="next" value="order_detail">
+                            <button type="submit" class="btn btn-outline-danger">
+                                <i class="bi bi-x-circle me-1"></i>Decline Order
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if order.rider %}
+            <div class="card mb-4 border-info">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-bicycle me-2"></i>Delivery Rider Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Rider Name:</strong> {{ order.rider.first_name }} {{ order.rider.last_name }}</p>
+                            <p class="mb-1"><strong>Contact:</strong> {{ order.rider.email }}</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p class="mb-1 text-muted">Your order is being delivered by {{ order.rider.first_name }}.</p>
+                            <p class="mb-0 text-muted">They will contact you if needed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card mb-4 border-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-clock-history fs-4 text-warning me-3"></i>
+                        <div>
+                            {% if order.status == 'pending' %}
+                            <h6 class="mb-1">Waiting for Store Approval</h6>
+                            <p class="mb-0 text-muted">The store owner will accept or decline your order soon.</p>
+                            {% else %}
+                            <h6 class="mb-1">Waiting for Rider Assignment</h6>
+                            <p class="mb-0 text-muted">Your order is being prepared. A delivery rider will be assigned soon.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Delivery Address</h5>
+                    <p>
+                        {{ order.first_name }} {{ order.last_name }}<br>
+                        {{ order.address }}<br>
+                        {{ order.city }}, {{ order.postal_code }}<br>
+                        Phone: {{ order.phone }}<br>
+                        Email: {{ order.email }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Order Items</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.items.all %}
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>{{ item.price }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.get_total }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                                    <td><strong>{{ order.get_subtotal }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end">Delivery Fee</td>
+                                    <td>45.00</td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td colspan="3" class="text-end"><strong>Total</strong></td>
+                                    <td><strong>{{ order.get_subtotal|add:"45.00" }}</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="{% url 'store_list' %}" class="btn btn-outline-success btn-lg me-2">
+                    <i class="bi bi-basket me-2"></i>Continue Shopping
+                </a>
+
+                <a href="{% url 'order_history' %}" class="btn btn-success btn-lg">
+                    <i class="bi bi-list-ul me-2"></i>View All Orders
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

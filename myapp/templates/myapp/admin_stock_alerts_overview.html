@@ -1,0 +1,92 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}Stock Alerts - Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-2"><i class="bi bi-exclamation-triangle me-2"></i>Stock Alerts</h1>
+            <p class="text-muted">Review low stock and out of stock products and update inventory as needed.</p>
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-exclamation-circle me-2"></i>Low Stock</h5>
+                    <span class="badge bg-warning text-dark">{{ low_stock_count }}</span>
+                </div>
+                <div class="card-body p-0">
+                    {% if low_stock_products %}
+                    <div class="table-responsive">
+                        <table class="table mb-0 table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Stock</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in low_stock_products %}
+                                <tr>
+                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.stock }}</td>
+                                    <td>
+                                        <a href="{% url 'admin:myapp_product_change' product.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="p-4 text-center text-muted">No low stock products found.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-x-circle me-2"></i>Out of Stock</h5>
+                    <span class="badge bg-danger">{{ out_of_stock_count }}</span>
+                </div>
+                <div class="card-body p-0">
+                    {% if out_of_stock_products %}
+                    <div class="table-responsive">
+                        <table class="table mb-0 table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in out_of_stock_products %}
+                                <tr>
+                                    <td>{{ product.name }}</td>
+                                    <td>
+                                        <a href="{% url 'admin:myapp_product_change' product.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="p-4 text-center text-muted">No out of stock products found.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

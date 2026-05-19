@@ -1,0 +1,158 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}
+{% if category %}{{ category.name }} - {% endif %}Products - Esugo Grocery
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <!-- Store selector -->
+        {% if not selected_store %}
+        <div class="col-lg-3 mb-4">
+            {% if stores %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Preferred Store</h5>
+                    <div class="list-group list-group-flush">
+                        {% for store in stores %}
+                        <a href="{% if category %}{% url 'product_list_by_category' category.slug %}{% else %}{% url 'product_list' %}{% endif %}?store={{ store.owner.id }}{% if query %}&q={{ query }}{% endif %}"
+                           class="list-group-item list-group-item-action {% if selected_store.owner.id == store.owner.id %}active{% endif %}">
+                            {{ store.store_name }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Main Content - Products -->
+        <div class="{% if selected_store %}col-12{% else %}col-lg-9{% endif %}">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2>
+                        {% if category %}
+                        {{ category.name }}
+                        {% elif query %}
+                        Search Results for "{{ query }}"
+                        {% elif selected_store %}
+                        {{ selected_store.store_name }} Products
+                        {% else %}
+                        All Products
+                        {% endif %}
+                    </h2>
+                    {% if selected_store %}
+                    <p class="text-success mb-1">
+                        <i class="bi bi-shop me-1"></i>Shopping from {{ selected_store.store_name }}
+                    </p>
+                    {% endif %}
+                    <p class="text-muted mb-0">
+                        Showing {{ products.start_index }}-{{ products.end_index }} of {{ products.paginator.count }} products
+                    </p>
+                </div>
+                
+                <!-- Sort Options -->
+                <div class="d-flex align-items-center">
+                    <label class="me-2">Sort by:</label>
+                    <select class="form-select form-select-sm" onchange="location.href=this.value;">
+                        <option value="{% if category %}{% url 'product_list_by_category' category.slug %}{% else %}{% url 'product_list' %}{% endif %}?sort=name{% if store_id %}&store={{ store_id }}{% endif %}{% if query %}&q={{ query }}{% endif %}" {% if sort_by == 'name' %}selected{% endif %}>Name A-Z</option>
+                        <option value="{% if category %}{% url 'product_list_by_category' category.slug %}{% else %}{% url 'product_list' %}{% endif %}?sort=price_low{% if store_id %}&store={{ store_id }}{% endif %}{% if query %}&q={{ query }}{% endif %}" {% if sort_by == 'price_low' %}selected{% endif %}>Price: Low to High</option>
+                        <option value="{% if category %}{% url 'product_list_by_category' category.slug %}{% else %}{% url 'product_list' %}{% endif %}?sort=price_high{% if store_id %}&store={{ store_id }}{% endif %}{% if query %}&q={{ query }}{% endif %}" {% if sort_by == 'price_high' %}selected{% endif %}>Price: High to Low</option>
+                        <option value="{% if category %}{% url 'product_list_by_category' category.slug %}{% else %}{% url 'product_list' %}{% endif %}?sort=newest{% if store_id %}&store={{ store_id }}{% endif %}{% if query %}&q={{ query }}{% endif %}" {% if sort_by == 'newest' %}selected{% endif %}>Newest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card product-card h-100">
+                        <a href="{% url 'product_detail' product.category.slug product.slug %}">
+                            {% if product.image %}
+                            <img src="{{ product.image.url }}?v={{ product.updated_at|date:'U' }}" class="card-img-top product-image" alt="{{ product.name }}" onerror="this.src='https://placehold.co/300x200/e9ecef/6c757d?text={{ product.name|urlencode }}'">
+                            {% else %}
+                            <img src="https://placehold.co/300x200/e9ecef/6c757d?text={{ product.name|urlencode }}" class="card-img-top product-image" alt="{{ product.name }}">
+                            {% endif %}
+                        </a>
+                            <div class="card-body">
+                                <small class="text-muted">{{ product.category.name }}</small>
+                                {% if product.owner and product.owner.store_settings %}
+                                <small class="text-muted d-block">{{ product.owner.store_settings.store_name }}</small>
+                                {% endif %}
+                                <h5 class="card-title">
+                                    <a href="{% url 'product_detail' product.category.slug product.slug %}" class="text-decoration-none text-dark">
+                                        {{ product.name }}
+                                </a>
+                            </h5>
+                            <p class="card-text text-success fw-bold">{{ product.price }}</p>
+                            <p class="card-text">
+                                <small class="{% if product.stock == 0 %}text-danger{% elif product.stock < 10 %}text-warning{% else %}text-success{% endif %}">
+                                    {{ product.get_stock_status }}
+                                </small>
+                            </p>
+                            {% if product.stock > 0 %}
+                            <a href="{% url 'product_detail' product.category.slug product.slug %}" class="btn btn-success btn-sm w-100">
+                                <i class="bi bi-eye me-1"></i>View Product
+                            </a>
+                            {% else %}
+                            <button class="btn btn-secondary btn-sm w-100" disabled>
+                                <i class="bi bi-x-circle me-1"></i>Out of Stock
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info text-center">
+                        <i class="bi bi-info-circle me-2"></i>No products found.
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if products.paginator.num_pages > 1 %}
+            <nav aria-label="Product pagination" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if products.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1{% if query %}&q={{ query }}{% endif %}{% if store_id %}&store={{ store_id }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ products.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if store_id %}&store={{ store_id }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">Previous</a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in products.paginator.page_range %}
+                    {% if products.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                    {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}{% if store_id %}&store={{ store_id }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">{{ num }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if products.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ products.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if store_id %}&store={{ store_id }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ products.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}{% if store_id %}&store={{ store_id }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">Last</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

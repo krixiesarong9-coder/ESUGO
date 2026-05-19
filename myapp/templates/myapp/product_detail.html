@@ -1,0 +1,145 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} - Esugo Grocery{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'product_list' %}">Products</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'product_list_by_category' product.category.slug %}">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                {% if product.image %}
+                <img src="{{ product.image.url }}?v={{ product.updated_at|date:'U' }}" class="card-img-top product-detail-image" alt="{{ product.name }}">
+                {% else %}
+                <img src="https://via.placeholder.com/600x400?text={{ product.name|urlencode }}" class="card-img-top product-detail-image" alt="{{ product.name }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <small class="text-muted">{{ product.category.name }}</small>
+                    <h1 class="card-title mt-2">{{ product.name }}</h1>
+                    <p class="text-muted">{{ product.description }}</p>
+                    
+                    <div class="mb-3">
+                        <h2 class="text-success fw-bold">{{ product.price }}</h2>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="badge {% if product.stock == 0 %}bg-danger{% elif product.stock < 10 %}bg-warning{% else %}bg-success{% endif %}">
+                            {{ product.get_stock_status }}
+                        </span>
+                    </div>
+
+                    {% if product.stock > 0 %}
+                    <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label class="form-label" for="quantity">Quantity:</label>
+                            <div class="input-group" style="width: 150px;">
+                                <button class="btn btn-outline-secondary" type="button" onclick="decreaseQty()">-</button>
+                                <input type="number" class="form-control text-center" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock }}">
+                                <button class="btn btn-outline-secondary" type="button" onclick="increaseQty({{ product.stock }})">+</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-lg w-100 mb-3">
+                            <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </form>
+                    {% else %}
+                    <button class="btn btn-secondary btn-lg w-100 mb-3" disabled>
+                        <i class="bi bi-x-circle me-2"></i>Currently Unavailable
+                    </button>
+                    {% endif %}
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Category:</strong><br>{{ product.category.name }}</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Added:</strong><br>{{ product.created_at|date:"M d, Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    {% if related_products %}
+    <section class="mt-5">
+        <h3 class="mb-4">Related Products</h3>
+        <div class="row">
+            {% for related in related_products %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card product-card h-100">
+                        <a href="{% url 'product_detail' related.category.slug related.slug %}">
+                            {% if related.image %}
+                            <img src="{{ related.image.url }}?v={{ related.updated_at|date:'U' }}" class="card-img-top product-image" alt="{{ related.name }}">
+                            {% else %}
+                            <img src="https://via.placeholder.com/300x200?text={{ related.name|urlencode }}" class="card-img-top product-image" alt="{{ related.name }}">
+                            {% endif %}
+                        </a>
+                    <div class="card-body">
+                        <small class="text-muted">{{ related.category.name }}</small>
+                        <h5 class="card-title">
+                            <a href="{% url 'product_detail' related.category.slug related.slug %}" class="text-decoration-none text-dark">
+                                {{ related.name }}
+                            </a>
+                        </h5>
+                        <p class="card-text text-success fw-bold">{{ related.price }}</p>
+                        {% if related.stock > 0 %}
+                        <a href="{% url 'product_detail' related.category.slug related.slug %}" class="btn btn-success btn-sm w-100">
+                            <i class="bi bi-eye me-1"></i>View Product
+                        </a>
+                        {% else %}
+                        <button class="btn btn-secondary btn-sm w-100" disabled>
+                            <i class="bi bi-x-circle me-1"></i>Out of Stock
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function decreaseQty() {
+    const input = document.getElementById('quantity');
+    let value = parseInt(input.value);
+    if (value > 1) {
+        input.value = value - 1;
+    }
+}
+
+function increaseQty(max) {
+    const input = document.getElementById('quantity');
+    let value = parseInt(input.value);
+    if (value < max) {
+        input.value = value + 1;
+    }
+}
+</script>
+{% endblock %}

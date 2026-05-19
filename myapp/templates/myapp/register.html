@@ -1,0 +1,183 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}Register - Esugo Grocery{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <img src="{% static 'logo.png' %}" alt="E-Sugo Logo" class="img-fluid mb-3" style="max-width: 120px; border-radius: 50%; background: transparent;">
+                        <h2 class="mt-2">Create Account</h2>
+                        <p class="text-muted">Join Esugo Grocery today</p>
+                    </div>
+
+                    <form method="POST" class="register-form" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="id_first_name" class="form-label">First Name *</label>
+                                <input type="text" name="first_name" class="form-control" id="id_first_name" placeholder="First name" value="{{ register_data.first_name }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_last_name" class="form-label">Last Name *</label>
+                                <input type="text" name="last_name" class="form-control" id="id_last_name" placeholder="Last name" value="{{ register_data.last_name }}" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Username *</label>
+                            <input type="text" name="username" class="form-control" id="id_username" placeholder="Choose a username" value="{{ register_data.username }}" required>
+                            <div class="form-text">Required. 150 characters or fewer.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email Address *</label>
+                            <input type="email" name="email" class="form-control" id="id_email" placeholder="your@email.com" value="{{ register_data.email }}" required>
+                            <div class="form-text text-danger d-none" id="id_email_validation">Please enter an email with @ and a domain, like your@email.com.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password1" class="form-label">Password *</label>
+                            <div class="input-group">
+                                <input type="password" name="password1" class="form-control" id="id_password1" placeholder="Create a password" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('id_password1', 'toggleIcon1')">
+                                    <i class="bi bi-eye" id="toggleIcon1"></i>
+                                </button>
+                            </div>
+                            <div class="form-text">Your password must contain at least 8 characters.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password2" class="form-label">Confirm Password *</label>
+                            <div class="input-group">
+                                <input type="password" name="password2" class="form-control" id="id_password2" placeholder="Confirm your password" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('id_password2', 'toggleIcon2')">
+                                    <i class="bi bi-eye" id="toggleIcon2"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">I want to register as *</label>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="user_type" id="user_type_customer" value="customer" {% if register_data.user_type == 'customer' or not register_data.user_type %}checked{% endif %}>
+                                        <label class="form-check-label" for="user_type_customer">
+                                            <i class="bi bi-person me-1"></i>Customer
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="user_type" id="user_type_rider" value="rider" {% if register_data.user_type == 'rider' %}checked{% endif %}>
+                                        <label class="form-check-label" for="user_type_rider">
+                                            <i class="bi bi-bicycle me-1"></i>Rider
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="user_type" id="user_type_store_owner" value="store_owner" {% if register_data.user_type == 'store_owner' %}checked{% endif %}>
+                                        <label class="form-check-label" for="user_type_store_owner">
+                                            <i class="bi bi-shop me-1"></i>Store Owner
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="user_type" id="user_type_admin" value="admin" {% if register_data.user_type == 'admin' %}checked{% endif %}>
+                                        <label class="form-check-label" for="user_type_admin">
+                                            <i class="bi bi-shield-check me-1"></i>Admin
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-text">Select the type of account you want to create.</div>
+                        </div>
+
+                        {% if register_errors %}
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-circle me-2"></i>
+                            <ul class="mb-0">
+                                {% for error in register_errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-person-plus me-2"></i>Create Account
+                            </button>
+                        </div>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="text-muted mb-0">
+                            Already have an account? 
+                            <a href="{% url 'login' %}" class="text-success text-decoration-none">Sign in here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function togglePassword(inputId, iconId) {
+    const passwordInput = document.getElementById(inputId);
+    const toggleIcon = document.getElementById(iconId);
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('bi-eye');
+        toggleIcon.classList.add('bi-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('bi-eye-slash');
+        toggleIcon.classList.add('bi-eye');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const registerForm = document.querySelector('.register-form');
+    const emailInput = document.getElementById('id_email');
+    const emailValidation = document.getElementById('id_email_validation');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!registerForm || !emailInput || !emailValidation) {
+        return;
+    }
+
+    function validateEmail(showMessage) {
+        const isValid = emailPattern.test(emailInput.value.trim());
+        emailValidation.classList.toggle('d-none', !showMessage || isValid);
+        return isValid;
+    }
+
+    emailInput.addEventListener('input', function () {
+        validateEmail(emailInput.value.trim() !== '');
+    });
+
+    registerForm.addEventListener('submit', function (event) {
+        if (!validateEmail(true)) {
+            event.preventDefault();
+            emailInput.focus();
+        }
+    });
+});
+
+</script>
+{% endblock %}

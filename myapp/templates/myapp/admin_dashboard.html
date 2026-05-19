@@ -1,0 +1,228 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}Admin Dashboard - Esugo Grocery{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-2"><i class="bi bi-shield-check me-2"></i>Admin Dashboard</h1>
+            <p class="text-muted">Welcome back, {{ user.first_name|default:user.username }}!</p>
+        </div>
+    </div>
+
+    <!-- Overview Stats -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Total Orders</h6>
+                            <h3 class="mb-0">{{ total_orders }}</h3>
+                        </div>
+                        <i class="bi bi-basket-fill fs-1 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Total Revenue</h6>
+                            <h3 class="mb-0">₱{{ total_revenue|floatformat:2 }}</h3>
+                        </div>
+                        <span class="fs-1 fw-bold opacity-50">₱</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-info text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Total Customers</h6>
+                            <h3 class="mb-0">{{ total_customers }}</h3>
+                        </div>
+                        <i class="bi bi-people-fill fs-1 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-warning text-white h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Products</h6>
+                            <h3 class="mb-0">{{ total_products }}</h3>
+                        </div>
+                        <i class="bi bi-box-seam-fill fs-1 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Status Row -->
+    <div class="row mb-4">
+        <div class="col-md-2 col-6 mb-2">
+            <div class="card text-center">
+                <div class="card-body py-2">
+                    <h6 class="text-secondary mb-0">Pending</h6>
+                    <h4 class="mb-0">{{ pending_orders }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-6 mb-2">
+            <div class="card text-center">
+                <div class="card-body py-2">
+                    <h6 class="text-info mb-0">Confirmed</h6>
+                    <h4 class="mb-0">{{ confirmed_orders }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-6 mb-2">
+            <div class="card text-center">
+                <div class="card-body py-2">
+                    <h6 class="text-warning mb-0">Preparing</h6>
+                    <h4 class="mb-0">{{ preparing_orders }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-6 mb-2">
+            <div class="card text-center">
+                <div class="card-body py-2">
+                    <h6 class="text-primary mb-0">Out for Delivery</h6>
+                    <h4 class="mb-0">{{ out_for_delivery_orders }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-6 mb-2">
+            <div class="card text-center">
+                <div class="card-body py-2">
+                    <h6 class="text-success mb-0">Delivered</h6>
+                    <h4 class="mb-0">{{ delivered_orders }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-6 mb-2">
+            <div class="card text-center">
+                <div class="card-body py-2">
+                    <h6 class="text-danger mb-0">Cancelled</h6>
+                    <h4 class="mb-0">{{ cancelled_orders }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Recent Orders -->
+        <div class="col-lg-8 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Recent Orders</h5>
+                    <a href="#recent-orders" class="btn btn-outline-primary btn-sm">
+                        View All <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if recent_orders %}
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle" id="recent-orders">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in recent_orders %}
+                                <tr>
+                                    <td><strong>{{ order.order_number }}</strong></td>
+                                    <td>{{ order.first_name }} {{ order.last_name }}</td>
+                                    <td>{{ order.created_at|date:"M d, Y" }}</td>
+                                    <td>
+                                        <span class="badge {% if order.status == 'pending' %}bg-secondary{% elif order.status == 'confirmed' %}bg-info{% elif order.status == 'preparing' %}bg-warning{% elif order.status == 'out_for_delivery' %}bg-primary{% elif order.status == 'delivered' %}bg-success{% else %}bg-danger{% endif %}">
+                                            {{ order.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td><strong>₱{{ order.total_amount }}</strong></td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="{% url 'order_detail' order.order_number %}" class="btn btn-sm btn-outline-primary" title="View Details">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            {% if not order.rider and order.status != 'delivered' and order.status != 'cancelled' %}
+                                            <a href="{% url 'admin_assign_rider' order.order_number %}" class="btn btn-sm btn-outline-success" title="Assign Rider">
+                                                <i class="bi bi-bicycle"></i>
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-muted text-center py-4">No orders yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Products & Stock Alerts -->
+        <div class="col-lg-4 mb-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-graph-up-arrow me-2"></i>Top Products</h5>
+                </div>
+                <div class="card-body">
+                    {% if top_products %}
+                    <ul class="list-group list-group-flush">
+                        {% for product in top_products %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <span>{{ product.name }}</span>
+                            <span class="badge bg-primary rounded-pill">{{ product.total_sold }} sold</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="text-muted mb-0">No sales data yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-exclamation-triangle me-2"></i>Stock Alerts</h5>
+                    <a href="{% url 'admin_stock_alerts' %}" class="btn btn-outline-warning btn-sm">Manage</a>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <a href="{% url 'admin_low_stock_products' %}" class="text-decoration-none text-warning">
+                            <span><i class="bi bi-exclamation-circle me-1"></i> Low Stock</span>
+                        </a>
+                        <strong>{{ low_stock_products }}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'admin_out_of_stock_products' %}" class="text-decoration-none text-danger">
+                            <span><i class="bi bi-x-circle me-1"></i> Out of Stock</span>
+                        </a>
+                        <strong>{{ out_of_stock_products }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
