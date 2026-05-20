@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.core.management import call_command
 from django.db.models import Q, Count
 from django.utils import timezone
 from django.urls import reverse
@@ -166,12 +165,6 @@ def store_list(request):
     if profile.user_type != 'customer':
         messages.error(request, 'Only customers can choose a preferred store.')
         return redirect('home')
-
-    if not StoreSettings.objects.exists():
-        try:
-            call_command('load_initial_data_once')
-        except Exception as exc:
-            messages.error(request, f'Store data could not be loaded automatically: {exc}')
 
     stores = StoreSettings.objects.select_related('owner').filter(
         owner__profile__user_type='store_owner'
