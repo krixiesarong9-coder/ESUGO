@@ -19,18 +19,18 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['price', 'stock', 'is_available']
     readonly_fields = ['created_at', 'updated_at']
 
-    fieldsets = (
-        ('Product Information', {
-            'fields': ('name', 'slug', 'category', 'description', 'image')
-        }),
-        ('Pricing & Inventory', {
-            'fields': ('price', 'stock', 'is_available')
-        }),
-        ('Timestamps', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-    )
+   fieldsets = (
+    ('Product Information', {
+        'fields': ('owner', 'name', 'slug', 'category', 'description', 'image')
+    }),
+    ('Pricing & Inventory', {
+        'fields': ('price', 'stock', 'is_available')
+    }),
+    ('Timestamps', {
+        'fields': ('created_at', 'updated_at'),
+        'classes': ('collapse',)
+    }),
+)
 
 
 @admin.register(Profile)
