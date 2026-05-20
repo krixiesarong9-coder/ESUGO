@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: esugo
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py load_initial_data_once
+    startCommand: gunicorn Esugo.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://*.onrender.com
+      - key: DATABASE_URL
+        fromDatabase:
+          name: esugo-db
+          property: connectionString
+
+databases:
+  - name: esugo-db
