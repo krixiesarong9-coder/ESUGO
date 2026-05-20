@@ -166,7 +166,7 @@ def store_list(request):
         messages.error(request, 'Only customers can choose a preferred store.')
         return redirect('home')
 
-    stores = StoreSettings.objects.select_related('owner').filter(
+    stores = StoreSettings.objects.all()
         owner__profile__user_type='store_owner'
     ).exclude(
         store_name__icontains='Esugo'
