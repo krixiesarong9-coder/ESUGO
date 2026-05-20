@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
 from django.utils import timezone
 from .models import Category, Product, Profile, StoreSettings, Order, OrderItem, Cart, CartItem
 
@@ -12,26 +13,47 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'owner', 'category', 'price', 'stock', 'is_available', 'created_at']
-    fields = ['owner', 'name', 'slug', 'category', 'description', 'image', 'price', 'stock', 'is_available']
-    list_filter = ['category', 'is_available', 'created_at']
+    list_display = ['name', 'store_name', 'owner', 'category', 'price', 'stock', 'is_available', 'created_at']
+    list_filter = ['owner__store_settings__store_name', 'category', 'is_available', 'created_at']
+    list_select_related = ['owner', 'owner__store_settings', 'category']
     prepopulated_fields = {'slug': ('name',)}
-    search_fields = ['name', 'description']
-    list_editable = ['price', 'stock', 'is_available']
+    search_fields = ['name', 'description', 'owner__username', 'owner__store_settings__store_name']
+    list_editable = ['owner', 'price', 'stock', 'is_available']
     readonly_fields = ['created_at', 'updated_at']
 
-   fieldsets = (
-    ('Product Information', {
-    'fields': ('owner', 'name', 'slug', 'category', 'description', 'image')
-}),
-    ('Pricing & Inventory', {
-        'fields': ('price', 'stock', 'is_available')
-    }),
-    ('Timestamps', {
-        'fields': ('created_at', 'updated_at'),
-        'classes': ('collapse',)
-    }),
-)
+    fieldsets = (
+        ('Store Assignment', {
+            'fields': ('owner',)
+        }),
+        ('Product Information', {
+            'fields': ('name', 'slug', 'category', 'description', 'image')
+        }),
+        ('Pricing & Inventory', {
+            'fields': ('price', 'stock', 'is_available')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    @admin.display(description='Store', ordering='owner__store_settings__store_name')
+    def store_name(self, obj):
+        if not obj.owner_id:
+            return '-'
+
+        store_settings = getattr(obj.owner, 'store_settings', None)
+        if store_settings:
+            return store_settings.store_name
+
+        return obj.owner.username
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'owner':
+            kwargs['queryset'] = User.objects.filter(
+                profile__user_type='store_owner'
+            ).order_by('store_settings__store_name', 'username')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(Profile)
