@@ -1,1765 +1,1732 @@
 [
-{
-  "model": "auth.user",
-  "pk": 10,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$jraOrysDOUVxT1Z0i0XN5T$LHWdArAktXFeBnVjebhve9tPqO99G+vtWoMfZ06Bz9k=",
-    "last_login": "2026-05-18T02:01:57.754Z",
-    "is_superuser": false,
-    "username": "rider",
-    "first_name": "rider",
-    "last_name": "rider",
-    "email": "rider@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-04-29T21:59:13.480Z",
-    "groups": [],
-    "user_permissions": []
+  {
+    "model": "auth.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$jraOrysDOUVxT1Z0i0XN5T$LHWdArAktXFeBnVjebhve9tPqO99G+vtWoMfZ06Bz9k=",
+      "last_login": "2026-05-18T02:01:57.754Z",
+      "is_superuser": false,
+      "username": "rider",
+      "first_name": "rider",
+      "last_name": "rider",
+      "email": "rider@email.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-04-29T21:59:13.480Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$6ySzmppPTkGNd2wUfWRpN3$ujDqG34UFw5UNx/xItAKAZsyVsBd5sbN99up1LCsur4=",
+      "last_login": "2026-05-18T10:40:46.168Z",
+      "is_superuser": false,
+      "username": "Admin1",
+      "first_name": "admin",
+      "last_name": "admin",
+      "email": "admin1@email.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-04-29T22:52:50.777Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 13,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$4kzfnhO0CgOSaeesMffYC5$yrTiExjNTpWDtwCkinXUTtQXDHCGygj28y4M65m9+wk=",
+      "last_login": "2026-05-14T09:51:36.780Z",
+      "is_superuser": true,
+      "username": "superadmin",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@esugo.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-05-04T10:38:25.244Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 16,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$P9SBgrB5Yj2Ft0uiPBg0Yn$dEZLTXIfqHwt4kTDXdLqrqgyuB29eEDkIIf4IWz8K24=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "hedric_store",
+      "first_name": "Hedric",
+      "last_name": "Store",
+      "email": "hedric@esugo.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-12T06:48:22.818Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 17,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$uKQxCyxt3sa4A8WZbnMtrF$67+q8GxEUsGw38KLnmGK98dN3+6Gq3njQe1w/pQ0IlE=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "happy_mart",
+      "first_name": "Happy",
+      "last_name": "Mart",
+      "email": "happy@esugo.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-12T06:48:23.745Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 19,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$wjoeVNJ3TDeWtSHsvyQ1IC$WNMPfUzoeXiHyt1GDJRW1wLYMmlbBzeiFePLiOEBv+E=",
+      "last_login": "2026-05-19T09:02:15.352Z",
+      "is_superuser": false,
+      "username": "customer",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-14T09:43:11.138Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 20,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$an89ZSvHoF8P4lm6oVKuLp$ZI3deZzIefxDAwnp2nRzD5r3YqCmQVPMuyVBO4JU3rA=",
+      "last_login": "2026-05-18T00:25:59.649Z",
+      "is_superuser": false,
+      "username": "hannastore",
+      "first_name": "hanna",
+      "last_name": "store",
+      "email": "hannastore@email.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-15T11:27:53.864Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 21,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$MHjgPSMMhiQhKmKN4by75u$ZYvhn92+3ybvp3PFR2C6Ignudw0LH1naQy2eGeuE/wI=",
+      "last_login": "2026-05-15T13:51:45.253Z",
+      "is_superuser": false,
+      "username": "hedricstore",
+      "first_name": "hedric",
+      "last_name": "store",
+      "email": "hedricstore@email.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-15T11:52:30.278Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 22,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$AiCM6HiPUCZvOii4iK8gun$tNqA2N0WAD69TXvHfuYNyOzizYCXzaXfauShXer1BTM=",
+      "last_login": "2026-05-15T13:47:01.825Z",
+      "is_superuser": false,
+      "username": "happymart",
+      "first_name": "happymart",
+      "last_name": "store",
+      "email": "happymart@email.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-15T11:54:03.703Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 23,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$IOMHEk13J10FstrdKlHLOS$1vfiE4Z6gKmWyr72L/0IBWiktXlG31H9LP2OLkrATaM=",
+      "last_login": "2026-05-15T13:35:51.001Z",
+      "is_superuser": false,
+      "username": "Mich",
+      "first_name": "Michelle",
+      "last_name": "Bernados",
+      "email": "michellebernados@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-15T13:35:29.116Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 24,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$kQWbyGU6nk70QJa6SF2EbB$PVsYOiS5zhp2Z05teyQk6efMTP7fbPfsu9oW5oBroc8=",
+      "last_login": "2026-05-15T13:39:11.332Z",
+      "is_superuser": false,
+      "username": "Dianjane",
+      "first_name": "Dian",
+      "last_name": "Uriarte",
+      "email": "enguitodia@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-15T13:38:32.178Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 25,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$9wTWlAUYVGVrllOLOyjt4f$N21bFX57q0ylpVS/QrRAug3U29m6vQ0zZaXXmnv6F58=",
+      "last_login": "2026-05-15T13:51:00.981Z",
+      "is_superuser": false,
+      "username": "hazil",
+      "first_name": "Hazil",
+      "last_name": "Catid",
+      "email": "hazilcatid@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-15T13:39:52.066Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 26,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$nrLW3fjFPe7thjUn3LEal9$uDJCOZwOAWbZI8NtaTRsfIfmfSMGeMarl5sFqNbte8s=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "Krixie",
+      "first_name": "Krixie",
+      "last_name": "Sarong",
+      "email": "krixie@email.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-15T15:04:16.920Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 27,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$ePAsFyff4nZBQPvGtpejVK$5r98WjtH8oaqHnQOib7Zn3qmO+PBocdTGuTypqC8ytA=",
+      "last_login": "2026-05-15T15:07:49.319Z",
+      "is_superuser": false,
+      "username": "Nathalie",
+      "first_name": "Nathalie",
+      "last_name": "Limbaro",
+      "email": "nathalie@email.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-15T15:07:29.935Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 28,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$jMU10RDqX9uI92pENp7sry$TbDNr2/k6Ubb2CiGejZeOejRddQM3UwB1EFKevceCNU=",
+      "last_login": "2026-05-18T00:24:30.228Z",
+      "is_superuser": false,
+      "username": "alex",
+      "first_name": "alex",
+      "last_name": "bravo",
+      "email": "alexbravo",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-18T00:24:10.113Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "myapp.category",
+    "pk": 1,
+    "fields": {
+      "name": "Fruits",
+      "slug": "fruits",
+      "description": "Fresh and juicy fruits",
+      "image": "",
+      "created_at": "2026-04-07T05:22:14.540Z"
+    }
+  },
+  {
+    "model": "myapp.category",
+    "pk": 2,
+    "fields": {
+      "name": "Vegetables",
+      "slug": "vegetables",
+      "description": "Fresh vegetables and greens",
+      "image": "",
+      "created_at": "2026-04-07T05:22:14.573Z"
+    }
+  },
+  {
+    "model": "myapp.category",
+    "pk": 3,
+    "fields": {
+      "name": "Dairy",
+      "slug": "dairy",
+      "description": "Milk, cheese, and dairy products",
+      "image": "",
+      "created_at": "2026-04-07T05:22:14.588Z"
+    }
+  },
+  {
+    "model": "myapp.category",
+    "pk": 4,
+    "fields": {
+      "name": "Bakery",
+      "slug": "bakery",
+      "description": "Fresh bread and baked goods",
+      "image": "",
+      "created_at": "2026-04-07T05:22:14.630Z"
+    }
+  },
+  {
+    "model": "myapp.category",
+    "pk": 5,
+    "fields": {
+      "name": "Meat",
+      "slug": "meat",
+      "description": "Fresh meat and poultry",
+      "image": "",
+      "created_at": "2026-04-07T05:22:14.645Z"
+    }
+  },
+  {
+    "model": "myapp.category",
+    "pk": 6,
+    "fields": {
+      "name": "Beverages",
+      "slug": "beverages",
+      "description": "Drinks and beverages",
+      "image": "",
+      "created_at": "2026-04-07T05:22:14.662Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 50,
+    "fields": {
+      "owner": [
+        "hannastore"
+      ],
+      "name": "Croissants",
+      "slug": "croissants",
+      "category": 4,
+      "description": "Buttery French croissants, pack of 4.",
+      "price": "39.00",
+      "stock": 14,
+      "image": "products/real_croissants_N8CgAu7.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:32:18.602Z",
+      "updated_at": "2026-05-15T15:10:37.696Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 52,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "name": "Orange Juice",
+      "slug": "orange-juice",
+      "category": 6,
+      "description": "Fresh squeezed orange juice, 1 liter.",
+      "price": "25.00",
+      "stock": 34,
+      "image": "products/real_orange-juice_ozk4H5N.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:32:21.838Z",
+      "updated_at": "2026-05-15T13:48:16.856Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 53,
+    "fields": {
+      "owner": [
+        "happymart"
+      ],
+      "name": "Coffee Beans",
+      "slug": "coffee-beans",
+      "category": 6,
+      "description": "Premium Arabica coffee beans, 1 lb.",
+      "price": "35.00",
+      "stock": 16,
+      "image": "products/coffee-beans-real_eBQV37m.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:32:24.771Z",
+      "updated_at": "2026-05-04T23:56:59.456Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 54,
+    "fields": {
+      "owner": [
+        "hannastore"
+      ],
+      "name": "Mineral Water",
+      "slug": "mineral-water",
+      "category": 6,
+      "description": "Natural mineral water, 1 liter.",
+      "price": "30.00",
+      "stock": 98,
+      "image": "products/mineral-water-real_sE3KAxi.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:32:28.414Z",
+      "updated_at": "2026-05-04T23:56:59.475Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 55,
+    "fields": {
+      "owner": [
+        "hannastore"
+      ],
+      "name": "Fresh Apples",
+      "slug": "fresh-apples",
+      "category": 1,
+      "description": "Crisp and juicy red apples, perfect for snacking.",
+      "price": "25.00",
+      "stock": 45,
+      "image": "products/fresh-apples_FEjKhVX.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:32:53.381Z",
+      "updated_at": "2026-05-15T12:07:07.566Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 56,
+    "fields": {
+      "owner": [
+        "hannastore"
+      ],
+      "name": "Bananas",
+      "slug": "bananas",
+      "category": 1,
+      "description": "Ripe yellow bananas, rich in potassium.",
+      "price": "45.00",
+      "stock": 81,
+      "image": "products/real_bananas_IC94SAN.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:32:55.431Z",
+      "updated_at": "2026-05-18T00:27:23.409Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 57,
+    "fields": {
+      "owner": [
+        "happymart"
+      ],
+      "name": "Oranges",
+      "slug": "oranges",
+      "category": 1,
+      "description": "Sweet and tangy oranges, great for juice.",
+      "price": "15.00",
+      "stock": 34,
+      "image": "products/real_oranges_aSkitGx.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:32:57.779Z",
+      "updated_at": "2026-05-15T12:02:56.571Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 58,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "name": "Strawberries",
+      "slug": "strawberries",
+      "category": 1,
+      "description": "Fresh red strawberries, perfect for desserts.",
+      "price": "150.00",
+      "stock": 29,
+      "image": "products/real_strawberries_Qrv3W0N.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:32:59.625Z",
+      "updated_at": "2026-05-15T10:35:02.182Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 59,
+    "fields": {
+      "owner": [
+        "happymart"
+      ],
+      "name": "Carrots",
+      "slug": "carrots",
+      "category": 2,
+      "description": "Fresh organic carrots, great for salads.",
+      "price": "50.00",
+      "stock": 57,
+      "image": "products/real_carrots_aFvRlgn.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:01.611Z",
+      "updated_at": "2026-05-14T09:59:41.309Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 60,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "name": "Broccoli",
+      "slug": "broccoli",
+      "category": 2,
+      "description": "Fresh green broccoli, rich in vitamins.",
+      "price": "65.00",
+      "stock": 42,
+      "image": "products/broccoli_b3n4iLp.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:03.743Z",
+      "updated_at": "2026-05-15T10:35:02.205Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 61,
+    "fields": {
+      "owner": [
+        "happymart"
+      ],
+      "name": "Tomatoes",
+      "slug": "tomatoes",
+      "category": 2,
+      "description": "Ripe red tomatoes, perfect for cooking.",
+      "price": "60.00",
+      "stock": 80,
+      "image": "products/real_tomatoes_YroaQCG.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:05.481Z",
+      "updated_at": "2026-05-04T10:42:52.553Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 62,
+    "fields": {
+      "owner": [
+        "hannastore"
+      ],
+      "name": "Potatoes",
+      "slug": "potatoes",
+      "category": 2,
+      "description": "Fresh potatoes, great for any meal.",
+      "price": "50.00",
+      "stock": 99,
+      "image": "products/real_potatoes_Fpb3iGi.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:07.221Z",
+      "updated_at": "2026-05-15T15:09:34.852Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 63,
+    "fields": {
+      "owner": [
+        "hannastore"
+      ],
+      "name": "Whole Milk",
+      "slug": "whole-milk",
+      "category": 3,
+      "description": "Fresh whole milk, 1 gallon.",
+      "price": "190.00",
+      "stock": 39,
+      "image": "products/real_whole-milk_w7DQRAY.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:08.905Z",
+      "updated_at": "2026-05-04T10:42:52.554Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 64,
+    "fields": {
+      "owner": [
+        "hannastore"
+      ],
+      "name": "Cheddar Cheese",
+      "slug": "cheddar-cheese",
+      "category": 3,
+      "description": "Aged cheddar cheese, sharp flavor.",
+      "price": "105.00",
+      "stock": 24,
+      "image": "products/real_cheddar-cheese_o9akw0l.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:10.482Z",
+      "updated_at": "2026-05-14T06:12:01.707Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 65,
+    "fields": {
+      "owner": [
+        "happymart"
+      ],
+      "name": "Yogurt",
+      "slug": "yogurt",
+      "category": 3,
+      "description": "Creamy Greek yogurt, high protein.",
+      "price": "98.98",
+      "stock": 33,
+      "image": "products/real_greek-yogurt_pwcmgJW.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:12.504Z",
+      "updated_at": "2026-05-15T10:02:10.168Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 66,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "name": "Eggs",
+      "slug": "eggs",
+      "category": 3,
+      "description": "Fresh farm eggs, dozen.",
+      "price": "280.00",
+      "stock": 53,
+      "image": "products/real_eggs_nxK6MMs.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:14.490Z",
+      "updated_at": "2026-05-15T11:55:41.033Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 67,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "name": "Whole Wheat Bread",
+      "slug": "whole-wheat-bread",
+      "category": 4,
+      "description": "Freshly baked whole wheat bread.",
+      "price": "70.00",
+      "stock": 25,
+      "image": "products/real_whole-wheat-bread_qNp5kPJ.jpg",
+      "is_available": true,
+      "created_at": "2026-04-13T01:33:16.644Z",
+      "updated_at": "2026-05-04T12:12:54.037Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 68,
+    "fields": {
+      "owner": [
+        "happymart"
+      ],
+      "name": "Fresh Chicken",
+      "slug": "fresh-chicken",
+      "category": 5,
+      "description": "Fresh whole chicken, perfect for roasting or grilling.",
+      "price": "250.00",
+      "stock": 36,
+      "image": "products/fresh-chicken_jFgTDHu.jpg",
+      "is_available": true,
+      "created_at": "2026-05-03T10:15:25.307Z",
+      "updated_at": "2026-05-15T13:42:11.248Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 69,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "name": "Chicken Breast",
+      "slug": "chicken-breast",
+      "category": 5,
+      "description": "Boneless, skinless chicken breast, lean and tender.",
+      "price": "155.00",
+      "stock": 32,
+      "image": "products/chicken-breast_dGJvTNF.jpg",
+      "is_available": true,
+      "created_at": "2026-05-03T10:15:28.150Z",
+      "updated_at": "2026-05-15T10:35:02.231Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 70,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "name": "Fresh Beef",
+      "slug": "beef-steak",
+      "category": 5,
+      "description": "Fresh beef without seasoning, perfect for grilling or pan-searing.",
+      "price": "200.00",
+      "stock": 30,
+      "image": "products/fresh-beef-new.jpg",
+      "is_available": true,
+      "created_at": "2026-05-03T10:15:31.531Z",
+      "updated_at": "2026-05-04T10:42:52.540Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 74,
+    "fields": {
+      "owner": null,
+      "name": "mango",
+      "slug": "123",
+      "category": 1,
+      "description": "asdfgh",
+      "price": "25.00",
+      "stock": 10,
+      "image": "products/images.jpg",
+      "is_available": true,
+      "created_at": "2026-05-14T05:34:33.414Z",
+      "updated_at": "2026-05-14T05:34:33.414Z"
+    }
+  },
+  {
+    "model": "myapp.product",
+    "pk": 75,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "name": "pomelo",
+      "slug": "pomelanice123",
+      "category": 1,
+      "description": "sweet and affordable",
+      "price": "55.00",
+      "stock": 13,
+      "image": "products/images_1.jpg",
+      "is_available": true,
+      "created_at": "2026-05-14T05:45:33.296Z",
+      "updated_at": "2026-05-15T10:35:02.155Z"
+    }
+  },
+  {
+    "model": "myapp.storesettings",
+    "pk": 2,
+    "fields": {
+      "owner": [
+        "hannastore"
+      ],
+      "store_name": "Hanna Store",
+      "location": "Linintian, Cantilan",
+      "opening_hours": "7:00 AM - 7:00 PM",
+      "updated_at": "2026-05-12T06:50:00.887Z"
+    }
+  },
+  {
+    "model": "myapp.storesettings",
+    "pk": 3,
+    "fields": {
+      "owner": [
+        "hedricstore"
+      ],
+      "store_name": "Hedric Store",
+      "location": "Magosilom, Cantilan",
+      "opening_hours": "6:00 AM - 6:00 PM",
+      "updated_at": "2026-05-12T06:50:00.899Z"
+    }
+  },
+  {
+    "model": "myapp.storesettings",
+    "pk": 4,
+    "fields": {
+      "owner": [
+        "happymart"
+      ],
+      "store_name": "Happy Mart",
+      "location": "Pag-antayan, Cantilan",
+      "opening_hours": "8:00 AM - 12:00 AM",
+      "updated_at": "2026-05-12T06:50:00.909Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 10,
+    "fields": {
+      "user": [
+        "rider"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "rider",
+      "created_at": "2026-04-29T21:59:15.067Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 12,
+    "fields": {
+      "user": [
+        "Admin1"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "admin",
+      "created_at": "2026-04-29T22:52:52.249Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 13,
+    "fields": {
+      "user": [
+        "superadmin"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "customer",
+      "created_at": "2026-05-04T10:39:46.576Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 16,
+    "fields": {
+      "user": [
+        "hedric_store"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "store_owner",
+      "created_at": "2026-05-12T06:48:23.737Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 17,
+    "fields": {
+      "user": [
+        "happy_mart"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "store_owner",
+      "created_at": "2026-05-12T06:48:24.613Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 19,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "customer",
+      "created_at": "2026-05-14T09:43:12.478Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 20,
+    "fields": {
+      "user": [
+        "hannastore"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "store_owner",
+      "created_at": "2026-05-15T11:27:55.285Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 21,
+    "fields": {
+      "user": [
+        "hedricstore"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "store_owner",
+      "created_at": "2026-05-15T11:52:31.573Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 22,
+    "fields": {
+      "user": [
+        "happymart"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "store_owner",
+      "created_at": "2026-05-15T11:54:05.026Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 23,
+    "fields": {
+      "user": [
+        "Mich"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "customer",
+      "created_at": "2026-05-15T13:35:30.391Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 24,
+    "fields": {
+      "user": [
+        "Dianjane"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "customer",
+      "created_at": "2026-05-15T13:38:33.643Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 25,
+    "fields": {
+      "user": [
+        "hazil"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "customer",
+      "created_at": "2026-05-15T13:39:53.654Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 26,
+    "fields": {
+      "user": [
+        "Krixie"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "customer",
+      "created_at": "2026-05-15T15:04:18.374Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 27,
+    "fields": {
+      "user": [
+        "Nathalie"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "customer",
+      "created_at": "2026-05-15T15:07:31.247Z"
+    }
+  },
+  {
+    "model": "myapp.profile",
+    "pk": 28,
+    "fields": {
+      "user": [
+        "alex"
+      ],
+      "phone": "",
+      "address": "",
+      "city": "",
+      "postal_code": "",
+      "user_type": "customer",
+      "created_at": "2026-05-18T00:24:11.519Z"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 20,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "store_owner": [
+        "hedricstore"
+      ],
+      "rider": [
+        "rider"
+      ],
+      "order_number": "ESU-20260514-0001",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "phone": "(099) 876-5432",
+      "address": "tapa",
+      "city": "surigao del sur",
+      "postal_code": "12345",
+      "total_amount": "435.00",
+      "status": "cancelled",
+      "payment_status": "paid",
+      "payment_method": "cod",
+      "paymongo_link_id": "cs_d210f1d4f2f98589b687ee06",
+      "checkout_url": "https://checkout.paymongo.com/d210f1d4f2f98589b687ee06",
+      "notes": "qqqqqq",
+      "created_at": "2026-05-14T10:06:33.322Z",
+      "updated_at": "2026-05-15T10:29:05.557Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 21,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "store_owner": [
+        "happymart"
+      ],
+      "rider": [
+        "rider"
+      ],
+      "order_number": "ESU-20260515-0001",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "phone": "(121) 212-12",
+      "address": "pag antayan",
+      "city": "cantilan",
+      "postal_code": "1452",
+      "total_amount": "98.98",
+      "status": "delivered",
+      "payment_status": "failed",
+      "payment_method": "cod",
+      "paymongo_link_id": "cs_391b2f86ae57dc3a2694bfee",
+      "checkout_url": "https://checkout.paymongo.com/391b2f86ae57dc3a2694bfee",
+      "notes": "faster",
+      "created_at": "2026-05-15T10:02:10.029Z",
+      "updated_at": "2026-05-15T10:28:59.406Z",
+      "delivered_at": "2026-05-15T10:28:59.406Z"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 22,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "store_owner": [
+        "happymart"
+      ],
+      "rider": [
+        "rider"
+      ],
+      "order_number": "ESU-20260515-0002",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "phone": "(123) 4",
+      "address": "sssss",
+      "city": "sssss",
+      "postal_code": "111",
+      "total_amount": "15.00",
+      "status": "delivered",
+      "payment_status": "pending",
+      "payment_method": "cod",
+      "paymongo_link_id": "",
+      "checkout_url": "",
+      "notes": "wwww",
+      "created_at": "2026-05-15T10:10:34.753Z",
+      "updated_at": "2026-05-15T10:17:04.889Z",
+      "delivered_at": "2026-05-15T10:17:04.889Z"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 23,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "store_owner": [
+        "hedricstore"
+      ],
+      "rider": [
+        "rider"
+      ],
+      "order_number": "ESU-20260515-0003",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "phone": "(099) 876-5432",
+      "address": "wwww",
+      "city": "cantilan",
+      "postal_code": "2222",
+      "total_amount": "425.00",
+      "status": "delivered",
+      "payment_status": "pending",
+      "payment_method": "cod",
+      "paymongo_link_id": "",
+      "checkout_url": "",
+      "notes": "xxxx",
+      "created_at": "2026-05-15T10:35:02.125Z",
+      "updated_at": "2026-05-15T10:45:07.544Z",
+      "delivered_at": "2026-05-15T10:45:07.544Z"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 24,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "store_owner": [
+        "hannastore"
+      ],
+      "rider": [
+        "rider"
+      ],
+      "order_number": "ESU-20260515-0004",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "phone": "(099) 876-5432",
+      "address": "aaa",
+      "city": "cantilan",
+      "postal_code": "22",
+      "total_amount": "25.00",
+      "status": "delivered",
+      "payment_status": "paid",
+      "payment_method": "cod",
+      "paymongo_link_id": "",
+      "checkout_url": "",
+      "notes": "aaaaa",
+      "created_at": "2026-05-15T11:06:29.088Z",
+      "updated_at": "2026-05-15T11:07:57.575Z",
+      "delivered_at": "2026-05-15T11:07:57.575Z"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 25,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "store_owner": [
+        "hedricstore"
+      ],
+      "rider": null,
+      "order_number": "ESU-20260515-0005",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "phone": "(121) 212-12",
+      "address": "soc",
+      "city": "surigao del sure",
+      "postal_code": "12345",
+      "total_amount": "280.00",
+      "status": "pending",
+      "payment_status": "pending",
+      "payment_method": "cod",
+      "paymongo_link_id": "",
+      "checkout_url": "",
+      "notes": "sssss",
+      "created_at": "2026-05-15T11:55:41.008Z",
+      "updated_at": "2026-05-15T11:55:41.008Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 26,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "store_owner": [
+        "happymart"
+      ],
+      "rider": null,
+      "order_number": "ESU-20260515-0006",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "phone": "(123) 4",
+      "address": "ddd",
+      "city": "ddd",
+      "postal_code": "1",
+      "total_amount": "15.00",
+      "status": "pending",
+      "payment_status": "pending",
+      "payment_method": "cod",
+      "paymongo_link_id": "",
+      "checkout_url": "",
+      "notes": "dddd",
+      "created_at": "2026-05-15T12:02:56.549Z",
+      "updated_at": "2026-05-15T12:02:56.549Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 27,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "store_owner": [
+        "hannastore"
+      ],
+      "rider": null,
+      "order_number": "ESU-20260515-0007",
+      "first_name": "customer",
+      "last_name": "ert",
+      "email": "customer3@email.com",
+      "phone": "(111) 1",
+      "address": "zz",
+      "city": "aaa",
+      "postal_code": "111",
+      "total_amount": "25.00",
+      "status": "pending",
+      "payment_status": "pending",
+      "payment_method": "cod",
+      "paymongo_link_id": "",
+      "checkout_url": "",
+      "notes": "aasas",
+      "created_at": "2026-05-15T12:07:07.544Z",
+      "updated_at": "2026-05-15T12:07:07.544Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 28,
+    "fields": {
+      "user": [
+        "hazil"
+      ],
+      "store_owner": [
+        "happymart"
+      ],
+      "rider": [
+        "rider"
+      ],
+      "order_number": "ESU-20260515-0008",
+      "first_name": "Hazil",
+      "last_name": "Catid",
+      "email": "hazilcatid@gmail.com",
+      "phone": "(097) 035-8427",
+      "address": "purok 4, pag-antayan",
+      "city": "Cantilan",
+      "postal_code": "8317",
+      "total_amount": "500.00",
+      "status": "delivered",
+      "payment_status": "paid",
+      "payment_method": "cod",
+      "paymongo_link_id": "",
+      "checkout_url": "",
+      "notes": "",
+      "created_at": "2026-05-15T13:42:11.208Z",
+      "updated_at": "2026-05-15T13:54:06.118Z",
+      "delivered_at": "2026-05-15T13:54:06.118Z"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 29,
+    "fields": {
+      "user": [
+        "Mich"
+      ],
+      "store_owner": [
+        "hannastore"
+      ],
+      "rider": null,
+      "order_number": "ESU-20260515-0009",
+      "first_name": "Michelle",
+      "last_name": "Bernados",
+      "email": "michellebernados@gmail.com",
+      "phone": "(953) 061-7211",
+      "address": "Magosilom",
+      "city": "Surigao del Sur",
+      "postal_code": "8310",
+      "total_amount": "45.00",
+      "status": "confirmed",
+      "payment_status": "pending",
+      "payment_method": "cod",
+      "paymongo_link_id": "",
+      "checkout_url": "",
+      "notes": "",
+      "created_at": "2026-05-15T13:43:33.482Z",
+      "updated_at": "2026-05-15T13:50:31.965Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 30,
+    "fields": {
+      "user": [
+        "Mich"
+      ],
+      "store_owner": [
+        "hedricstore"
+      ],
+      "rider": [
+        "rider"
+      ],
+      "order_number": "ESU-20260515-0010",
+      "first_name": "Michelle",
+      "last_name": "Bernados",
+      "email": "michellebernados@gmail.com",
+      "phone": "(953) 061-7211",
+      "address": "Magosilom",
+      "city": "Cantilan",
+      "postal_code": "8310",
+      "total_amount": "25.00",
+      "status": "cancelled",
+      "payment_status": "paid",
+      "payment_method": "paymongo",
+      "paymongo_link_id": "cs_bb5509b1fcd2c1cb406486a0",
+      "checkout_url": "https://checkout.paymongo.com/bb5509b1fcd2c1cb406486a0",
+      "notes": "",
+      "created_at": "2026-05-15T13:48:16.826Z",
+      "updated_at": "2026-05-15T14:02:24.629Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 31,
+    "fields": {
+      "user": [
+        "Nathalie"
+      ],
+      "store_owner": [
+        "hannastore"
+      ],
+      "rider": null,
+      "order_number": "ESU-20260515-0011",
+      "first_name": "Nathalie",
+      "last_name": "Limbaro",
+      "email": "nathalie@email.com",
+      "phone": "(999) 999",
+      "address": "Linintian",
+      "city": "Surigao del sur",
+      "postal_code": "1234",
+      "total_amount": "50.00",
+      "status": "pending",
+      "payment_status": "pending",
+      "payment_method": "paymongo",
+      "paymongo_link_id": "cs_ca03fbf0e88bca9b1d55b6f9",
+      "checkout_url": "https://checkout.paymongo.com/ca03fbf0e88bca9b1d55b6f9",
+      "notes": "Faster",
+      "created_at": "2026-05-15T15:09:34.769Z",
+      "updated_at": "2026-05-15T15:12:43.614Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 32,
+    "fields": {
+      "user": [
+        "Nathalie"
+      ],
+      "store_owner": [
+        "hannastore"
+      ],
+      "rider": null,
+      "order_number": "ESU-20260515-0012",
+      "first_name": "Nathalie",
+      "last_name": "Limbaro",
+      "email": "nathalie@email.com",
+      "phone": "(997) 68",
+      "address": "Nahagav",
+      "city": "Surigao",
+      "postal_code": "111",
+      "total_amount": "39.00",
+      "status": "pending",
+      "payment_status": "paid",
+      "payment_method": "paymongo",
+      "paymongo_link_id": "cs_f1ebb215aab68744be48f896",
+      "checkout_url": "https://checkout.paymongo.com/f1ebb215aab68744be48f896",
+      "notes": "Hahbsdg",
+      "created_at": "2026-05-15T15:10:37.673Z",
+      "updated_at": "2026-05-15T15:12:01.528Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 33,
+    "fields": {
+      "user": [
+        "alex"
+      ],
+      "store_owner": [
+        "hannastore"
+      ],
+      "rider": [
+        "rider"
+      ],
+      "order_number": "ESU-20260518-0001",
+      "first_name": "alex",
+      "last_name": "bravo",
+      "email": "alexbravo@gmail.com",
+      "phone": "(091) 234-5689",
+      "address": "asdfasdf",
+      "city": "sdfsdfasdfs",
+      "postal_code": "SDFSDFSDFS",
+      "total_amount": "135.00",
+      "status": "out_for_delivery",
+      "payment_status": "paid",
+      "payment_method": "paymongo",
+      "paymongo_link_id": "cs_be826977de74cf051356d661",
+      "checkout_url": "https://checkout.paymongo.com/be826977de74cf051356d661",
+      "notes": "asdfsdfsd",
+      "created_at": "2026-05-18T00:27:23.390Z",
+      "updated_at": "2026-05-18T02:01:32.581Z",
+      "delivered_at": null
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 39,
+    "fields": {
+      "order": 20,
+      "product": 66,
+      "quantity": 1,
+      "price": "280.00",
+      "total": "280.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 40,
+    "fields": {
+      "order": 20,
+      "product": 69,
+      "quantity": 1,
+      "price": "155.00",
+      "total": "155.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 41,
+    "fields": {
+      "order": 21,
+      "product": 65,
+      "quantity": 1,
+      "price": "98.98",
+      "total": "98.98"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 42,
+    "fields": {
+      "order": 22,
+      "product": 57,
+      "quantity": 1,
+      "price": "15.00",
+      "total": "15.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 43,
+    "fields": {
+      "order": 23,
+      "product": 75,
+      "quantity": 1,
+      "price": "55.00",
+      "total": "55.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 44,
+    "fields": {
+      "order": 23,
+      "product": 58,
+      "quantity": 1,
+      "price": "150.00",
+      "total": "150.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 45,
+    "fields": {
+      "order": 23,
+      "product": 60,
+      "quantity": 1,
+      "price": "65.00",
+      "total": "65.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 46,
+    "fields": {
+      "order": 23,
+      "product": 69,
+      "quantity": 1,
+      "price": "155.00",
+      "total": "155.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 47,
+    "fields": {
+      "order": 24,
+      "product": 55,
+      "quantity": 1,
+      "price": "25.00",
+      "total": "25.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 48,
+    "fields": {
+      "order": 25,
+      "product": 66,
+      "quantity": 1,
+      "price": "280.00",
+      "total": "280.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 49,
+    "fields": {
+      "order": 26,
+      "product": 57,
+      "quantity": 1,
+      "price": "15.00",
+      "total": "15.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 50,
+    "fields": {
+      "order": 27,
+      "product": 55,
+      "quantity": 1,
+      "price": "25.00",
+      "total": "25.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 51,
+    "fields": {
+      "order": 28,
+      "product": 68,
+      "quantity": 2,
+      "price": "250.00",
+      "total": "500.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 52,
+    "fields": {
+      "order": 29,
+      "product": 56,
+      "quantity": 1,
+      "price": "45.00",
+      "total": "45.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 53,
+    "fields": {
+      "order": 30,
+      "product": 52,
+      "quantity": 1,
+      "price": "25.00",
+      "total": "25.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 54,
+    "fields": {
+      "order": 31,
+      "product": 62,
+      "quantity": 1,
+      "price": "50.00",
+      "total": "50.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 55,
+    "fields": {
+      "order": 32,
+      "product": 50,
+      "quantity": 1,
+      "price": "39.00",
+      "total": "39.00"
+    }
+  },
+  {
+    "model": "myapp.orderitem",
+    "pk": 56,
+    "fields": {
+      "order": 33,
+      "product": 56,
+      "quantity": 3,
+      "price": "45.00",
+      "total": "135.00"
+    }
+  },
+  {
+    "model": "myapp.cart",
+    "pk": 4,
+    "fields": {
+      "user": [
+        "customer"
+      ],
+      "created_at": "2026-05-14T09:44:08.263Z",
+      "updated_at": "2026-05-14T09:44:08.263Z"
+    }
+  },
+  {
+    "model": "myapp.cart",
+    "pk": 5,
+    "fields": {
+      "user": [
+        "Mich"
+      ],
+      "created_at": "2026-05-15T13:36:46.761Z",
+      "updated_at": "2026-05-15T13:36:46.761Z"
+    }
+  },
+  {
+    "model": "myapp.cart",
+    "pk": 6,
+    "fields": {
+      "user": [
+        "hazil"
+      ],
+      "created_at": "2026-05-15T13:40:57.733Z",
+      "updated_at": "2026-05-15T13:40:57.733Z"
+    }
+  },
+  {
+    "model": "myapp.cart",
+    "pk": 7,
+    "fields": {
+      "user": [
+        "Nathalie"
+      ],
+      "created_at": "2026-05-15T15:08:37.252Z",
+      "updated_at": "2026-05-15T15:08:37.252Z"
+    }
+  },
+  {
+    "model": "myapp.cart",
+    "pk": 8,
+    "fields": {
+      "user": [
+        "alex"
+      ],
+      "created_at": "2026-05-18T00:24:55.203Z",
+      "updated_at": "2026-05-18T00:24:55.203Z"
+    }
+  },
+  {
+    "model": "myapp.cartitem",
+    "pk": 63,
+    "fields": {
+      "cart": 4,
+      "product": 66,
+      "quantity": 1,
+      "created_at": "2026-05-18T04:21:23.061Z",
+      "updated_at": "2026-05-18T04:21:23.074Z"
+    }
   }
-},
-{
-  "model": "auth.user",
-  "pk": 12,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$6ySzmppPTkGNd2wUfWRpN3$ujDqG34UFw5UNx/xItAKAZsyVsBd5sbN99up1LCsur4=",
-    "last_login": "2026-05-18T10:40:46.168Z",
-    "is_superuser": false,
-    "username": "Admin1",
-    "first_name": "admin",
-    "last_name": "admin",
-    "email": "admin1@email.com",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2026-04-29T22:52:50.777Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 13,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$4kzfnhO0CgOSaeesMffYC5$yrTiExjNTpWDtwCkinXUTtQXDHCGygj28y4M65m9+wk=",
-    "last_login": "2026-05-14T09:51:36.780Z",
-    "is_superuser": true,
-    "username": "superadmin",
-    "first_name": "",
-    "last_name": "",
-    "email": "admin@esugo.com",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2026-05-04T10:38:25.244Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 16,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$P9SBgrB5Yj2Ft0uiPBg0Yn$dEZLTXIfqHwt4kTDXdLqrqgyuB29eEDkIIf4IWz8K24=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "hedric_store",
-    "first_name": "Hedric",
-    "last_name": "Store",
-    "email": "hedric@esugo.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-12T06:48:22.818Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 17,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$uKQxCyxt3sa4A8WZbnMtrF$67+q8GxEUsGw38KLnmGK98dN3+6Gq3njQe1w/pQ0IlE=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "happy_mart",
-    "first_name": "Happy",
-    "last_name": "Mart",
-    "email": "happy@esugo.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-12T06:48:23.745Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 19,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$wjoeVNJ3TDeWtSHsvyQ1IC$WNMPfUzoeXiHyt1GDJRW1wLYMmlbBzeiFePLiOEBv+E=",
-    "last_login": "2026-05-19T09:02:15.352Z",
-    "is_superuser": false,
-    "username": "customer",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-14T09:43:11.138Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 20,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$an89ZSvHoF8P4lm6oVKuLp$ZI3deZzIefxDAwnp2nRzD5r3YqCmQVPMuyVBO4JU3rA=",
-    "last_login": "2026-05-18T00:25:59.649Z",
-    "is_superuser": false,
-    "username": "hannastore",
-    "first_name": "hanna",
-    "last_name": "store",
-    "email": "hannastore@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-15T11:27:53.864Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 21,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$MHjgPSMMhiQhKmKN4by75u$ZYvhn92+3ybvp3PFR2C6Ignudw0LH1naQy2eGeuE/wI=",
-    "last_login": "2026-05-15T13:51:45.253Z",
-    "is_superuser": false,
-    "username": "hedricstore",
-    "first_name": "hedric",
-    "last_name": "store",
-    "email": "hedricstore@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-15T11:52:30.278Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 22,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$AiCM6HiPUCZvOii4iK8gun$tNqA2N0WAD69TXvHfuYNyOzizYCXzaXfauShXer1BTM=",
-    "last_login": "2026-05-15T13:47:01.825Z",
-    "is_superuser": false,
-    "username": "happymart",
-    "first_name": "happymart",
-    "last_name": "store",
-    "email": "happymart@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-15T11:54:03.703Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 23,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$IOMHEk13J10FstrdKlHLOS$1vfiE4Z6gKmWyr72L/0IBWiktXlG31H9LP2OLkrATaM=",
-    "last_login": "2026-05-15T13:35:51.001Z",
-    "is_superuser": false,
-    "username": "Mich",
-    "first_name": "Michelle",
-    "last_name": "Bernados",
-    "email": "michellebernados@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-15T13:35:29.116Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 24,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$kQWbyGU6nk70QJa6SF2EbB$PVsYOiS5zhp2Z05teyQk6efMTP7fbPfsu9oW5oBroc8=",
-    "last_login": "2026-05-15T13:39:11.332Z",
-    "is_superuser": false,
-    "username": "Dianjane",
-    "first_name": "Dian",
-    "last_name": "Uriarte",
-    "email": "enguitodia@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-15T13:38:32.178Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 25,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$9wTWlAUYVGVrllOLOyjt4f$N21bFX57q0ylpVS/QrRAug3U29m6vQ0zZaXXmnv6F58=",
-    "last_login": "2026-05-15T13:51:00.981Z",
-    "is_superuser": false,
-    "username": "hazil",
-    "first_name": "Hazil",
-    "last_name": "Catid",
-    "email": "hazilcatid@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-15T13:39:52.066Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 26,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$nrLW3fjFPe7thjUn3LEal9$uDJCOZwOAWbZI8NtaTRsfIfmfSMGeMarl5sFqNbte8s=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "Krixie",
-    "first_name": "Krixie",
-    "last_name": "Sarong",
-    "email": "krixie@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-15T15:04:16.920Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 27,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$ePAsFyff4nZBQPvGtpejVK$5r98WjtH8oaqHnQOib7Zn3qmO+PBocdTGuTypqC8ytA=",
-    "last_login": "2026-05-15T15:07:49.319Z",
-    "is_superuser": false,
-    "username": "Nathalie",
-    "first_name": "Nathalie",
-    "last_name": "Limbaro",
-    "email": "nathalie@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-15T15:07:29.935Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 28,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$jMU10RDqX9uI92pENp7sry$TbDNr2/k6Ubb2CiGejZeOejRddQM3UwB1EFKevceCNU=",
-    "last_login": "2026-05-18T00:24:30.228Z",
-    "is_superuser": false,
-    "username": "alex",
-    "first_name": "alex",
-    "last_name": "bravo",
-    "email": "alexbravo",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-05-18T00:24:10.113Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 29,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$abv9y7B7qRR8vAsUT173fX$jQUKGrJZFUtwROWVY1vZYje0FdC74yElxVCs/cW6/WI=",
-    "last_login": "2026-05-20T09:56:53.525Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "admin@email.com",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2026-05-20T08:51:12.789Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "myapp.category",
-  "pk": 1,
-  "fields": {
-    "name": "Fruits",
-    "slug": "fruits",
-    "description": "Fresh and juicy fruits",
-    "image": "",
-    "created_at": "2026-04-07T05:22:14.540Z"
-  }
-},
-{
-  "model": "myapp.category",
-  "pk": 2,
-  "fields": {
-    "name": "Vegetables",
-    "slug": "vegetables",
-    "description": "Fresh vegetables and greens",
-    "image": "",
-    "created_at": "2026-04-07T05:22:14.573Z"
-  }
-},
-{
-  "model": "myapp.category",
-  "pk": 3,
-  "fields": {
-    "name": "Dairy",
-    "slug": "dairy",
-    "description": "Milk, cheese, and dairy products",
-    "image": "",
-    "created_at": "2026-04-07T05:22:14.588Z"
-  }
-},
-{
-  "model": "myapp.category",
-  "pk": 4,
-  "fields": {
-    "name": "Bakery",
-    "slug": "bakery",
-    "description": "Fresh bread and baked goods",
-    "image": "",
-    "created_at": "2026-04-07T05:22:14.630Z"
-  }
-},
-{
-  "model": "myapp.category",
-  "pk": 5,
-  "fields": {
-    "name": "Meat",
-    "slug": "meat",
-    "description": "Fresh meat and poultry",
-    "image": "",
-    "created_at": "2026-04-07T05:22:14.645Z"
-  }
-},
-{
-  "model": "myapp.category",
-  "pk": 6,
-  "fields": {
-    "name": "Beverages",
-    "slug": "beverages",
-    "description": "Drinks and beverages",
-    "image": "",
-    "created_at": "2026-04-07T05:22:14.662Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 50,
-  "fields": {
-    "owner": [
-      "hannastore"
-    ],
-    "name": "Croissants",
-    "slug": "croissants",
-    "category": 4,
-    "description": "Buttery French croissants, pack of 4.",
-    "price": "39.00",
-    "stock": 14,
-    "image": "products/real_croissants_N8CgAu7.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:32:18.602Z",
-    "updated_at": "2026-05-15T15:10:37.696Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 52,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "name": "Orange Juice",
-    "slug": "orange-juice",
-    "category": 6,
-    "description": "Fresh squeezed orange juice, 1 liter.",
-    "price": "25.00",
-    "stock": 34,
-    "image": "products/real_orange-juice_ozk4H5N.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:32:21.838Z",
-    "updated_at": "2026-05-15T13:48:16.856Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 53,
-  "fields": {
-    "owner": [
-      "happymart"
-    ],
-    "name": "Coffee Beans",
-    "slug": "coffee-beans",
-    "category": 6,
-    "description": "Premium Arabica coffee beans, 1 lb.",
-    "price": "35.00",
-    "stock": 16,
-    "image": "products/coffee-beans-real_eBQV37m.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:32:24.771Z",
-    "updated_at": "2026-05-04T23:56:59.456Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 54,
-  "fields": {
-    "owner": [
-      "hannastore"
-    ],
-    "name": "Mineral Water",
-    "slug": "mineral-water",
-    "category": 6,
-    "description": "Natural mineral water, 1 liter.",
-    "price": "30.00",
-    "stock": 98,
-    "image": "products/mineral-water-real_sE3KAxi.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:32:28.414Z",
-    "updated_at": "2026-05-04T23:56:59.475Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 55,
-  "fields": {
-    "owner": [
-      "hannastore"
-    ],
-    "name": "Fresh Apples",
-    "slug": "fresh-apples",
-    "category": 1,
-    "description": "Crisp and juicy red apples, perfect for snacking.",
-    "price": "25.00",
-    "stock": 45,
-    "image": "products/fresh-apples_FEjKhVX.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:32:53.381Z",
-    "updated_at": "2026-05-15T12:07:07.566Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 56,
-  "fields": {
-    "owner": [
-      "hannastore"
-    ],
-    "name": "Bananas",
-    "slug": "bananas",
-    "category": 1,
-    "description": "Ripe yellow bananas, rich in potassium.",
-    "price": "45.00",
-    "stock": 81,
-    "image": "products/real_bananas_IC94SAN.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:32:55.431Z",
-    "updated_at": "2026-05-18T00:27:23.409Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 57,
-  "fields": {
-    "owner": [
-      "happymart"
-    ],
-    "name": "Oranges",
-    "slug": "oranges",
-    "category": 1,
-    "description": "Sweet and tangy oranges, great for juice.",
-    "price": "15.00",
-    "stock": 34,
-    "image": "products/real_oranges_aSkitGx.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:32:57.779Z",
-    "updated_at": "2026-05-15T12:02:56.571Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 58,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "name": "Strawberries",
-    "slug": "strawberries",
-    "category": 1,
-    "description": "Fresh red strawberries, perfect for desserts.",
-    "price": "150.00",
-    "stock": 29,
-    "image": "products/real_strawberries_Qrv3W0N.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:32:59.625Z",
-    "updated_at": "2026-05-15T10:35:02.182Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 59,
-  "fields": {
-    "owner": [
-      "happymart"
-    ],
-    "name": "Carrots",
-    "slug": "carrots",
-    "category": 2,
-    "description": "Fresh organic carrots, great for salads.",
-    "price": "50.00",
-    "stock": 57,
-    "image": "products/real_carrots_aFvRlgn.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:01.611Z",
-    "updated_at": "2026-05-14T09:59:41.309Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 60,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "name": "Broccoli",
-    "slug": "broccoli",
-    "category": 2,
-    "description": "Fresh green broccoli, rich in vitamins.",
-    "price": "65.00",
-    "stock": 42,
-    "image": "products/broccoli_b3n4iLp.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:03.743Z",
-    "updated_at": "2026-05-15T10:35:02.205Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 61,
-  "fields": {
-    "owner": [
-      "happymart"
-    ],
-    "name": "Tomatoes",
-    "slug": "tomatoes",
-    "category": 2,
-    "description": "Ripe red tomatoes, perfect for cooking.",
-    "price": "60.00",
-    "stock": 80,
-    "image": "products/real_tomatoes_YroaQCG.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:05.481Z",
-    "updated_at": "2026-05-04T10:42:52.553Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 62,
-  "fields": {
-    "owner": [
-      "hannastore"
-    ],
-    "name": "Potatoes",
-    "slug": "potatoes",
-    "category": 2,
-    "description": "Fresh potatoes, great for any meal.",
-    "price": "50.00",
-    "stock": 99,
-    "image": "products/real_potatoes_Fpb3iGi.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:07.221Z",
-    "updated_at": "2026-05-15T15:09:34.852Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 63,
-  "fields": {
-    "owner": [
-      "hannastore"
-    ],
-    "name": "Whole Milk",
-    "slug": "whole-milk",
-    "category": 3,
-    "description": "Fresh whole milk, 1 gallon.",
-    "price": "190.00",
-    "stock": 39,
-    "image": "products/real_whole-milk_w7DQRAY.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:08.905Z",
-    "updated_at": "2026-05-04T10:42:52.554Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 64,
-  "fields": {
-    "owner": [
-      "hannastore"
-    ],
-    "name": "Cheddar Cheese",
-    "slug": "cheddar-cheese",
-    "category": 3,
-    "description": "Aged cheddar cheese, sharp flavor.",
-    "price": "105.00",
-    "stock": 24,
-    "image": "products/real_cheddar-cheese_o9akw0l.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:10.482Z",
-    "updated_at": "2026-05-14T06:12:01.707Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 65,
-  "fields": {
-    "owner": [
-      "happymart"
-    ],
-    "name": "Yogurt",
-    "slug": "yogurt",
-    "category": 3,
-    "description": "Creamy Greek yogurt, high protein.",
-    "price": "98.98",
-    "stock": 33,
-    "image": "products/real_greek-yogurt_pwcmgJW.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:12.504Z",
-    "updated_at": "2026-05-15T10:02:10.168Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 66,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "name": "Eggs",
-    "slug": "eggs",
-    "category": 3,
-    "description": "Fresh farm eggs, dozen.",
-    "price": "280.00",
-    "stock": 53,
-    "image": "products/real_eggs_nxK6MMs.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:14.490Z",
-    "updated_at": "2026-05-15T11:55:41.033Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 67,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "name": "Whole Wheat Bread",
-    "slug": "whole-wheat-bread",
-    "category": 4,
-    "description": "Freshly baked whole wheat bread.",
-    "price": "70.00",
-    "stock": 25,
-    "image": "products/real_whole-wheat-bread_qNp5kPJ.jpg",
-    "is_available": true,
-    "created_at": "2026-04-13T01:33:16.644Z",
-    "updated_at": "2026-05-04T12:12:54.037Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 68,
-  "fields": {
-    "owner": [
-      "happymart"
-    ],
-    "name": "Fresh Chicken",
-    "slug": "fresh-chicken",
-    "category": 5,
-    "description": "Fresh whole chicken, perfect for roasting or grilling.",
-    "price": "250.00",
-    "stock": 36,
-    "image": "products/fresh-chicken_jFgTDHu.jpg",
-    "is_available": true,
-    "created_at": "2026-05-03T10:15:25.307Z",
-    "updated_at": "2026-05-15T13:42:11.248Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 69,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "name": "Chicken Breast",
-    "slug": "chicken-breast",
-    "category": 5,
-    "description": "Boneless, skinless chicken breast, lean and tender.",
-    "price": "155.00",
-    "stock": 32,
-    "image": "products/chicken-breast_dGJvTNF.jpg",
-    "is_available": true,
-    "created_at": "2026-05-03T10:15:28.150Z",
-    "updated_at": "2026-05-15T10:35:02.231Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 70,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "name": "Fresh Beef",
-    "slug": "beef-steak",
-    "category": 5,
-    "description": "Fresh beef without seasoning, perfect for grilling or pan-searing.",
-    "price": "200.00",
-    "stock": 30,
-    "image": "products/fresh-beef-new.jpg",
-    "is_available": true,
-    "created_at": "2026-05-03T10:15:31.531Z",
-    "updated_at": "2026-05-04T10:42:52.540Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 74,
-  "fields": {
-    "owner": null,
-    "name": "mango",
-    "slug": "123",
-    "category": 1,
-    "description": "asdfgh",
-    "price": "25.00",
-    "stock": 10,
-    "image": "products/images.jpg",
-    "is_available": true,
-    "created_at": "2026-05-14T05:34:33.414Z",
-    "updated_at": "2026-05-14T05:34:33.414Z"
-  }
-},
-{
-  "model": "myapp.product",
-  "pk": 75,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "name": "pomelo",
-    "slug": "pomelanice123",
-    "category": 1,
-    "description": "sweet and affordable",
-    "price": "55.00",
-    "stock": 13,
-    "image": "products/images_1.jpg",
-    "is_available": true,
-    "created_at": "2026-05-14T05:45:33.296Z",
-    "updated_at": "2026-05-15T10:35:02.155Z"
-  }
-},
-{
-  "model": "myapp.storesettings",
-  "pk": 2,
-  "fields": {
-    "owner": [
-      "hannastore"
-    ],
-    "store_name": "Hanna Store",
-    "location": "Linintian, Cantilan",
-    "opening_hours": "7:00 AM - 7:00 PM",
-    "updated_at": "2026-05-12T06:50:00.887Z"
-  }
-},
-{
-  "model": "myapp.storesettings",
-  "pk": 3,
-  "fields": {
-    "owner": [
-      "hedricstore"
-    ],
-    "store_name": "Hedric Store",
-    "location": "Magosilom, Cantilan",
-    "opening_hours": "6:00 AM - 6:00 PM",
-    "updated_at": "2026-05-12T06:50:00.899Z"
-  }
-},
-{
-  "model": "myapp.storesettings",
-  "pk": 4,
-  "fields": {
-    "owner": [
-      "happymart"
-    ],
-    "store_name": "Happy Mart",
-    "location": "Pag-antayan, Cantilan",
-    "opening_hours": "8:00 AM - 12:00 AM",
-    "updated_at": "2026-05-12T06:50:00.909Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 10,
-  "fields": {
-    "user": [
-      "rider"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "rider",
-    "created_at": "2026-04-29T21:59:15.067Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 12,
-  "fields": {
-    "user": [
-      "Admin1"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "admin",
-    "created_at": "2026-04-29T22:52:52.249Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 13,
-  "fields": {
-    "user": [
-      "superadmin"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-04T10:39:46.576Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 16,
-  "fields": {
-    "user": [
-      "hedric_store"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "store_owner",
-    "created_at": "2026-05-12T06:48:23.737Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 17,
-  "fields": {
-    "user": [
-      "happy_mart"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "store_owner",
-    "created_at": "2026-05-12T06:48:24.613Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 19,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-14T09:43:12.478Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 20,
-  "fields": {
-    "user": [
-      "hannastore"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "store_owner",
-    "created_at": "2026-05-15T11:27:55.285Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 21,
-  "fields": {
-    "user": [
-      "hedricstore"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "store_owner",
-    "created_at": "2026-05-15T11:52:31.573Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 22,
-  "fields": {
-    "user": [
-      "happymart"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "store_owner",
-    "created_at": "2026-05-15T11:54:05.026Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 23,
-  "fields": {
-    "user": [
-      "Mich"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-15T13:35:30.391Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 24,
-  "fields": {
-    "user": [
-      "Dianjane"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-15T13:38:33.643Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 25,
-  "fields": {
-    "user": [
-      "hazil"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-15T13:39:53.654Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 26,
-  "fields": {
-    "user": [
-      "Krixie"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-15T15:04:18.374Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 27,
-  "fields": {
-    "user": [
-      "Nathalie"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-15T15:07:31.247Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 28,
-  "fields": {
-    "user": [
-      "alex"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-18T00:24:11.519Z"
-  }
-},
-{
-  "model": "myapp.profile",
-  "pk": 29,
-  "fields": {
-    "user": [
-      "admin"
-    ],
-    "phone": "",
-    "address": "",
-    "city": "",
-    "postal_code": "",
-    "user_type": "customer",
-    "created_at": "2026-05-20T09:56:53.896Z"
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 20,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "store_owner": [
-      "hedricstore"
-    ],
-    "rider": [
-      "rider"
-    ],
-    "order_number": "ESU-20260514-0001",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "phone": "(099) 876-5432",
-    "address": "tapa",
-    "city": "surigao del sur",
-    "postal_code": "12345",
-    "total_amount": "435.00",
-    "status": "cancelled",
-    "payment_status": "paid",
-    "payment_method": "cod",
-    "paymongo_link_id": "cs_d210f1d4f2f98589b687ee06",
-    "checkout_url": "https://checkout.paymongo.com/d210f1d4f2f98589b687ee06",
-    "notes": "qqqqqq",
-    "created_at": "2026-05-14T10:06:33.322Z",
-    "updated_at": "2026-05-15T10:29:05.557Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 21,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "store_owner": [
-      "happymart"
-    ],
-    "rider": [
-      "rider"
-    ],
-    "order_number": "ESU-20260515-0001",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "phone": "(121) 212-12",
-    "address": "pag antayan",
-    "city": "cantilan",
-    "postal_code": "1452",
-    "total_amount": "98.98",
-    "status": "delivered",
-    "payment_status": "failed",
-    "payment_method": "cod",
-    "paymongo_link_id": "cs_391b2f86ae57dc3a2694bfee",
-    "checkout_url": "https://checkout.paymongo.com/391b2f86ae57dc3a2694bfee",
-    "notes": "faster",
-    "created_at": "2026-05-15T10:02:10.029Z",
-    "updated_at": "2026-05-15T10:28:59.406Z",
-    "delivered_at": "2026-05-15T10:28:59.406Z"
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 22,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "store_owner": [
-      "happymart"
-    ],
-    "rider": [
-      "rider"
-    ],
-    "order_number": "ESU-20260515-0002",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "phone": "(123) 4",
-    "address": "sssss",
-    "city": "sssss",
-    "postal_code": "111",
-    "total_amount": "15.00",
-    "status": "delivered",
-    "payment_status": "pending",
-    "payment_method": "cod",
-    "paymongo_link_id": "",
-    "checkout_url": "",
-    "notes": "wwww",
-    "created_at": "2026-05-15T10:10:34.753Z",
-    "updated_at": "2026-05-15T10:17:04.889Z",
-    "delivered_at": "2026-05-15T10:17:04.889Z"
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 23,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "store_owner": [
-      "hedricstore"
-    ],
-    "rider": [
-      "rider"
-    ],
-    "order_number": "ESU-20260515-0003",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "phone": "(099) 876-5432",
-    "address": "wwww",
-    "city": "cantilan",
-    "postal_code": "2222",
-    "total_amount": "425.00",
-    "status": "delivered",
-    "payment_status": "pending",
-    "payment_method": "cod",
-    "paymongo_link_id": "",
-    "checkout_url": "",
-    "notes": "xxxx",
-    "created_at": "2026-05-15T10:35:02.125Z",
-    "updated_at": "2026-05-15T10:45:07.544Z",
-    "delivered_at": "2026-05-15T10:45:07.544Z"
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 24,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "store_owner": [
-      "hannastore"
-    ],
-    "rider": [
-      "rider"
-    ],
-    "order_number": "ESU-20260515-0004",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "phone": "(099) 876-5432",
-    "address": "aaa",
-    "city": "cantilan",
-    "postal_code": "22",
-    "total_amount": "25.00",
-    "status": "delivered",
-    "payment_status": "paid",
-    "payment_method": "cod",
-    "paymongo_link_id": "",
-    "checkout_url": "",
-    "notes": "aaaaa",
-    "created_at": "2026-05-15T11:06:29.088Z",
-    "updated_at": "2026-05-15T11:07:57.575Z",
-    "delivered_at": "2026-05-15T11:07:57.575Z"
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 25,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "store_owner": [
-      "hedricstore"
-    ],
-    "rider": null,
-    "order_number": "ESU-20260515-0005",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "phone": "(121) 212-12",
-    "address": "soc",
-    "city": "surigao del sure",
-    "postal_code": "12345",
-    "total_amount": "280.00",
-    "status": "pending",
-    "payment_status": "pending",
-    "payment_method": "cod",
-    "paymongo_link_id": "",
-    "checkout_url": "",
-    "notes": "sssss",
-    "created_at": "2026-05-15T11:55:41.008Z",
-    "updated_at": "2026-05-15T11:55:41.008Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 26,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "store_owner": [
-      "happymart"
-    ],
-    "rider": null,
-    "order_number": "ESU-20260515-0006",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "phone": "(123) 4",
-    "address": "ddd",
-    "city": "ddd",
-    "postal_code": "1",
-    "total_amount": "15.00",
-    "status": "pending",
-    "payment_status": "pending",
-    "payment_method": "cod",
-    "paymongo_link_id": "",
-    "checkout_url": "",
-    "notes": "dddd",
-    "created_at": "2026-05-15T12:02:56.549Z",
-    "updated_at": "2026-05-15T12:02:56.549Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 27,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "store_owner": [
-      "hannastore"
-    ],
-    "rider": null,
-    "order_number": "ESU-20260515-0007",
-    "first_name": "customer",
-    "last_name": "ert",
-    "email": "customer3@email.com",
-    "phone": "(111) 1",
-    "address": "zz",
-    "city": "aaa",
-    "postal_code": "111",
-    "total_amount": "25.00",
-    "status": "pending",
-    "payment_status": "pending",
-    "payment_method": "cod",
-    "paymongo_link_id": "",
-    "checkout_url": "",
-    "notes": "aasas",
-    "created_at": "2026-05-15T12:07:07.544Z",
-    "updated_at": "2026-05-15T12:07:07.544Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 28,
-  "fields": {
-    "user": [
-      "hazil"
-    ],
-    "store_owner": [
-      "happymart"
-    ],
-    "rider": [
-      "rider"
-    ],
-    "order_number": "ESU-20260515-0008",
-    "first_name": "Hazil",
-    "last_name": "Catid",
-    "email": "hazilcatid@gmail.com",
-    "phone": "(097) 035-8427",
-    "address": "purok 4, pag-antayan",
-    "city": "Cantilan",
-    "postal_code": "8317",
-    "total_amount": "500.00",
-    "status": "delivered",
-    "payment_status": "paid",
-    "payment_method": "cod",
-    "paymongo_link_id": "",
-    "checkout_url": "",
-    "notes": "",
-    "created_at": "2026-05-15T13:42:11.208Z",
-    "updated_at": "2026-05-15T13:54:06.118Z",
-    "delivered_at": "2026-05-15T13:54:06.118Z"
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 29,
-  "fields": {
-    "user": [
-      "Mich"
-    ],
-    "store_owner": [
-      "hannastore"
-    ],
-    "rider": null,
-    "order_number": "ESU-20260515-0009",
-    "first_name": "Michelle",
-    "last_name": "Bernados",
-    "email": "michellebernados@gmail.com",
-    "phone": "(953) 061-7211",
-    "address": "Magosilom",
-    "city": "Surigao del Sur",
-    "postal_code": "8310",
-    "total_amount": "45.00",
-    "status": "confirmed",
-    "payment_status": "pending",
-    "payment_method": "cod",
-    "paymongo_link_id": "",
-    "checkout_url": "",
-    "notes": "",
-    "created_at": "2026-05-15T13:43:33.482Z",
-    "updated_at": "2026-05-15T13:50:31.965Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 30,
-  "fields": {
-    "user": [
-      "Mich"
-    ],
-    "store_owner": [
-      "hedricstore"
-    ],
-    "rider": [
-      "rider"
-    ],
-    "order_number": "ESU-20260515-0010",
-    "first_name": "Michelle",
-    "last_name": "Bernados",
-    "email": "michellebernados@gmail.com",
-    "phone": "(953) 061-7211",
-    "address": "Magosilom",
-    "city": "Cantilan",
-    "postal_code": "8310",
-    "total_amount": "25.00",
-    "status": "cancelled",
-    "payment_status": "paid",
-    "payment_method": "paymongo",
-    "paymongo_link_id": "cs_bb5509b1fcd2c1cb406486a0",
-    "checkout_url": "https://checkout.paymongo.com/bb5509b1fcd2c1cb406486a0",
-    "notes": "",
-    "created_at": "2026-05-15T13:48:16.826Z",
-    "updated_at": "2026-05-15T14:02:24.629Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 31,
-  "fields": {
-    "user": [
-      "Nathalie"
-    ],
-    "store_owner": [
-      "hannastore"
-    ],
-    "rider": null,
-    "order_number": "ESU-20260515-0011",
-    "first_name": "Nathalie",
-    "last_name": "Limbaro",
-    "email": "nathalie@email.com",
-    "phone": "(999) 999",
-    "address": "Linintian",
-    "city": "Surigao del sur",
-    "postal_code": "1234",
-    "total_amount": "50.00",
-    "status": "pending",
-    "payment_status": "pending",
-    "payment_method": "paymongo",
-    "paymongo_link_id": "cs_ca03fbf0e88bca9b1d55b6f9",
-    "checkout_url": "https://checkout.paymongo.com/ca03fbf0e88bca9b1d55b6f9",
-    "notes": "Faster",
-    "created_at": "2026-05-15T15:09:34.769Z",
-    "updated_at": "2026-05-15T15:12:43.614Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 32,
-  "fields": {
-    "user": [
-      "Nathalie"
-    ],
-    "store_owner": [
-      "hannastore"
-    ],
-    "rider": null,
-    "order_number": "ESU-20260515-0012",
-    "first_name": "Nathalie",
-    "last_name": "Limbaro",
-    "email": "nathalie@email.com",
-    "phone": "(997) 68",
-    "address": "Nahagav",
-    "city": "Surigao",
-    "postal_code": "111",
-    "total_amount": "39.00",
-    "status": "pending",
-    "payment_status": "paid",
-    "payment_method": "paymongo",
-    "paymongo_link_id": "cs_f1ebb215aab68744be48f896",
-    "checkout_url": "https://checkout.paymongo.com/f1ebb215aab68744be48f896",
-    "notes": "Hahbsdg",
-    "created_at": "2026-05-15T15:10:37.673Z",
-    "updated_at": "2026-05-15T15:12:01.528Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.order",
-  "pk": 33,
-  "fields": {
-    "user": [
-      "alex"
-    ],
-    "store_owner": [
-      "hannastore"
-    ],
-    "rider": [
-      "rider"
-    ],
-    "order_number": "ESU-20260518-0001",
-    "first_name": "alex",
-    "last_name": "bravo",
-    "email": "alexbravo@gmail.com",
-    "phone": "(091) 234-5689",
-    "address": "asdfasdf",
-    "city": "sdfsdfasdfs",
-    "postal_code": "SDFSDFSDFS",
-    "total_amount": "135.00",
-    "status": "out_for_delivery",
-    "payment_status": "paid",
-    "payment_method": "paymongo",
-    "paymongo_link_id": "cs_be826977de74cf051356d661",
-    "checkout_url": "https://checkout.paymongo.com/be826977de74cf051356d661",
-    "notes": "asdfsdfsd",
-    "created_at": "2026-05-18T00:27:23.390Z",
-    "updated_at": "2026-05-18T02:01:32.581Z",
-    "delivered_at": null
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 39,
-  "fields": {
-    "order": 20,
-    "product": 66,
-    "quantity": 1,
-    "price": "280.00",
-    "total": "280.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 40,
-  "fields": {
-    "order": 20,
-    "product": 69,
-    "quantity": 1,
-    "price": "155.00",
-    "total": "155.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 41,
-  "fields": {
-    "order": 21,
-    "product": 65,
-    "quantity": 1,
-    "price": "98.98",
-    "total": "98.98"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 42,
-  "fields": {
-    "order": 22,
-    "product": 57,
-    "quantity": 1,
-    "price": "15.00",
-    "total": "15.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 43,
-  "fields": {
-    "order": 23,
-    "product": 75,
-    "quantity": 1,
-    "price": "55.00",
-    "total": "55.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 44,
-  "fields": {
-    "order": 23,
-    "product": 58,
-    "quantity": 1,
-    "price": "150.00",
-    "total": "150.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 45,
-  "fields": {
-    "order": 23,
-    "product": 60,
-    "quantity": 1,
-    "price": "65.00",
-    "total": "65.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 46,
-  "fields": {
-    "order": 23,
-    "product": 69,
-    "quantity": 1,
-    "price": "155.00",
-    "total": "155.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 47,
-  "fields": {
-    "order": 24,
-    "product": 55,
-    "quantity": 1,
-    "price": "25.00",
-    "total": "25.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 48,
-  "fields": {
-    "order": 25,
-    "product": 66,
-    "quantity": 1,
-    "price": "280.00",
-    "total": "280.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 49,
-  "fields": {
-    "order": 26,
-    "product": 57,
-    "quantity": 1,
-    "price": "15.00",
-    "total": "15.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 50,
-  "fields": {
-    "order": 27,
-    "product": 55,
-    "quantity": 1,
-    "price": "25.00",
-    "total": "25.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 51,
-  "fields": {
-    "order": 28,
-    "product": 68,
-    "quantity": 2,
-    "price": "250.00",
-    "total": "500.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 52,
-  "fields": {
-    "order": 29,
-    "product": 56,
-    "quantity": 1,
-    "price": "45.00",
-    "total": "45.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 53,
-  "fields": {
-    "order": 30,
-    "product": 52,
-    "quantity": 1,
-    "price": "25.00",
-    "total": "25.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 54,
-  "fields": {
-    "order": 31,
-    "product": 62,
-    "quantity": 1,
-    "price": "50.00",
-    "total": "50.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 55,
-  "fields": {
-    "order": 32,
-    "product": 50,
-    "quantity": 1,
-    "price": "39.00",
-    "total": "39.00"
-  }
-},
-{
-  "model": "myapp.orderitem",
-  "pk": 56,
-  "fields": {
-    "order": 33,
-    "product": 56,
-    "quantity": 3,
-    "price": "45.00",
-    "total": "135.00"
-  }
-},
-{
-  "model": "myapp.cart",
-  "pk": 4,
-  "fields": {
-    "user": [
-      "customer"
-    ],
-    "created_at": "2026-05-14T09:44:08.263Z",
-    "updated_at": "2026-05-14T09:44:08.263Z"
-  }
-},
-{
-  "model": "myapp.cart",
-  "pk": 5,
-  "fields": {
-    "user": [
-      "Mich"
-    ],
-    "created_at": "2026-05-15T13:36:46.761Z",
-    "updated_at": "2026-05-15T13:36:46.761Z"
-  }
-},
-{
-  "model": "myapp.cart",
-  "pk": 6,
-  "fields": {
-    "user": [
-      "hazil"
-    ],
-    "created_at": "2026-05-15T13:40:57.733Z",
-    "updated_at": "2026-05-15T13:40:57.733Z"
-  }
-},
-{
-  "model": "myapp.cart",
-  "pk": 7,
-  "fields": {
-    "user": [
-      "Nathalie"
-    ],
-    "created_at": "2026-05-15T15:08:37.252Z",
-    "updated_at": "2026-05-15T15:08:37.252Z"
-  }
-},
-{
-  "model": "myapp.cart",
-  "pk": 8,
-  "fields": {
-    "user": [
-      "alex"
-    ],
-    "created_at": "2026-05-18T00:24:55.203Z",
-    "updated_at": "2026-05-18T00:24:55.203Z"
-  }
-},
-{
-  "model": "myapp.cartitem",
-  "pk": 63,
-  "fields": {
-    "cart": 4,
-    "product": 66,
-    "quantity": 1,
-    "created_at": "2026-05-18T04:21:23.061Z",
-    "updated_at": "2026-05-18T04:21:23.074Z"
-  }
-}
 ]
