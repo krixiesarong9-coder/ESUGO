@@ -153,6 +153,123 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Barangay options by selected CARCANMADCARLAN city/municipality
+    var citySelect = document.querySelector('select[name="city"]');
+    var barangaySelect = document.querySelector('select[name="barangay"]');
+    var barangaysByCity = {
+        'Carrascal, Surigao del Sur': [
+            'Adlay',
+            'Babuyan',
+            'Bacolod',
+            'Baybay',
+            'Bon-ot',
+            'Caglayag',
+            'Dahican',
+            'Doyos',
+            'Embarcadero',
+            'Gamuton',
+            'Panikian',
+            'Pantukan',
+            'Saca',
+            'Tag-Anito'
+        ],
+        'Cantilan, Surigao del Sur': [
+            'Bugsukan',
+            'Buntalid',
+            'Cabangahan',
+            'Cabas-an',
+            'Calagdaan',
+            'Consuelo',
+            'General Island',
+            'Lininti-an',
+            'Lobo',
+            'Magasang',
+            'Magosilom',
+            'Pag-antayan',
+            'Palasao',
+            'Parang',
+            'San Pedro',
+            'Tapi',
+            'Tigabong'
+        ],
+        'Madrid, Surigao del Sur': [
+            'Bagsac',
+            'Bayogo',
+            'Linibonan',
+            'Magsaysay',
+            'Manga',
+            'Panayogon',
+            'Patong Patong',
+            'Quirino',
+            'San Antonio',
+            'San Juan',
+            'San Roque',
+            'San Vicente',
+            'Songkit',
+            'Union'
+        ],
+        'Carmen, Surigao del Sur': [
+            'Antao',
+            'Cancavan',
+            'Carmen',
+            'Esperanza',
+            'Hinapoyan',
+            'Puyat',
+            'San Vicente',
+            'Santa Cruz'
+        ],
+        'Lanuza, Surigao del Sur': [
+            'Agsam',
+            'Bocawe',
+            'Bunga',
+            'Gamuton',
+            'Habag',
+            'Mampi',
+            'Nurcia',
+            'Pakwan',
+            'Sibahay',
+            'Zone I',
+            'Zone II',
+            'Zone III',
+            'Zone IV'
+        ]
+    };
+
+    function updateBarangayOptions() {
+        if (!citySelect || !barangaySelect) {
+            return;
+        }
+
+        var selectedBarangay = barangaySelect.value;
+        var barangays = barangaysByCity[citySelect.value] || [];
+        var municipality = citySelect.value.split(',')[0];
+
+        barangaySelect.innerHTML = '';
+
+        var placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = citySelect.value ? 'Select barangay' : 'Select city/province first';
+        barangaySelect.appendChild(placeholder);
+
+        barangays.forEach(function(barangay) {
+            var barangayLabel = barangay + ' (' + municipality + ')';
+            var option = document.createElement('option');
+            option.value = barangayLabel;
+            option.textContent = barangayLabel;
+            if (barangayLabel === selectedBarangay) {
+                option.selected = true;
+            }
+            barangaySelect.appendChild(option);
+        });
+
+        barangaySelect.disabled = barangays.length === 0;
+    }
+
+    if (citySelect && barangaySelect) {
+        updateBarangayOptions();
+        citySelect.addEventListener('change', updateBarangayOptions);
+    }
+
     // Sort dropdown change handler
     var sortSelect = document.querySelector('select[onchange*="location.href"]');
     if (sortSelect) {

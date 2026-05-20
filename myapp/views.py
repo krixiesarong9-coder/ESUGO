@@ -368,6 +368,8 @@ def checkout(request):
             if payment_method not in {'cod', 'paymongo'}:
                 payment_method = 'cod'
 
+            delivery_address = f"{form.cleaned_data['address']}, {form.cleaned_data['barangay']}"
+
             # Create order
             order = Order(
                 user=request.user,
@@ -375,8 +377,8 @@ def checkout(request):
                 last_name=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
                 phone=form.cleaned_data['phone'],
-                address=form.cleaned_data['address'],
-                city='Cantilan',
+                address=delivery_address,
+                city=form.cleaned_data['city'],
                 postal_code=form.cleaned_data['postal_code'],
                 total_amount=cart.get_total(),
                 notes=form.cleaned_data['notes'],
@@ -414,6 +416,7 @@ def checkout(request):
             'email': request.user.email,
             'phone': profile.phone,
             'address': profile.address,
+            'city': profile.city,
             'postal_code': profile.postal_code,
         })
 
