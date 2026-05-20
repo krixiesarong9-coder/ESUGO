@@ -1,5 +1,7 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from django.db.models import Q
 from .models import Product, Profile, StoreSettings
 
 
@@ -248,10 +250,20 @@ class LoginForm(AuthenticationForm):
     """Custom login form with styled widgets"""
     username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Enter your username',
+        'placeholder': 'Enter your username or email',
         'autofocus': True,
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control',
         'placeholder': 'Enter your password',
     }))
+
+    def clean(self):
+        identity = self.cleaned_data.get('username', '').strip()
+        if identity:
+            user = User.objects.filter(
+                Q(username__iexact=identity) | Q(email__iexact=identity)
+            ).first()
+            if user:
+                self.cleaned_data['username'] = user.get_username()
+        return super().clean()
