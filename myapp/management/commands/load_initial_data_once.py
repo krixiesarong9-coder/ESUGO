@@ -11,5 +11,6 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING("Initial data skipped: database already has stores."))
             return
 
+        call_command("flush", interactive=False, verbosity=0)
         call_command("loaddata", "fixtures/initial_data.json")
         self.stdout.write(self.style.SUCCESS("Initial data loaded from fixtures/initial_data.json."))
