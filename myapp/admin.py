@@ -13,6 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'owner', 'category', 'price', 'stock', 'is_available', 'created_at']
+    fields = ['owner', 'name', 'slug', 'category', 'description', 'image', 'price', 'stock', 'is_available']
     list_filter = ['category', 'is_available', 'created_at']
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name', 'description']
