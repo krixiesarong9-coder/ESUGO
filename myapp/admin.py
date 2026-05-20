@@ -21,8 +21,8 @@ class ProductAdmin(admin.ModelAdmin):
 
    fieldsets = (
     ('Product Information', {
-        'fields': ('owner', 'name', 'slug', 'category', 'description', 'image')
-    }),
+    'fields': ('owner', 'name', 'slug', 'category', 'description', 'image')
+}),
     ('Pricing & Inventory', {
         'fields': ('price', 'stock', 'is_available')
     }),
