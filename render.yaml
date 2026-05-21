@@ -10,9 +10,9 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: ALLOWED_HOSTS
-        value: .onrender.com
+        value: .onrender.com,esugo.online,www.esugo.online
       - key: CSRF_TRUSTED_ORIGINS
-        value: https://*.onrender.com
+        value: https://*.onrender.com,https://esugo.online,https://www.esugo.online
       - key: DATABASE_URL
         fromDatabase:
           name: esugo-db
