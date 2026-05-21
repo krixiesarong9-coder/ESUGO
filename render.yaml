@@ -24,7 +24,7 @@ services:
       - key: DJANGO_SUPERUSER_USERNAME
         value: admin
       - key: DJANGO_SUPERUSER_EMAIL
-        value: krixiesarong9@gmail.com
+        sync: false
       - key: DJANGO_SUPERUSER_PASSWORD
         sync: false
 
