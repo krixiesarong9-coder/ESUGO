@@ -58,11 +58,15 @@ def login_view(request):
             
             if user is not None:
                 login(request, user)
-                
-                # Get user profile (create if doesn't exist)
+
                 profile, created = Profile.objects.get_or_create(user=user)
-                
-                # Redirect based on user type
+                if created:
+                    if user.is_superuser or user.is_staff:
+                        profile.user_type = 'admin'
+                    elif StoreSettings.objects.filter(owner=user).exists():
+                        profile.user_type = 'store_owner'
+                    profile.save()
+
                 if profile.user_type == 'rider':
                     messages.success(request, f'Welcome back, {user.first_name}!')
                     return redirect('rider_dashboard')
@@ -73,6 +77,7 @@ def login_view(request):
                     messages.success(request, f'Welcome back, {user.first_name}!')
                     return redirect('admin_dashboard')
                 else:
+                    messages.success(request, f'Welcome back, {user.first_name or user.username}!')
                     return redirect('home')
         else:
             # Form is invalid - add error messages

@@ -13,14 +13,9 @@ class Command(BaseCommand):
     store_owner_usernames = {"hannastore", "hedricstore", "happymart"}
 
     def handle(self, *args, **options):
-        public_store_count = StoreSettings.objects.filter(
-            owner__profile__user_type="store_owner"
-        ).exclude(
-            store_name__icontains="Esugo"
-        ).count()
-
-        if public_store_count >= len(self.store_owner_usernames):
-            self.stdout.write(self.style.WARNING("Initial data skipped: public stores already exist."))
+        existing_count = User.objects.filter(username__in=self.store_owner_usernames).count()
+        if existing_count >= len(self.store_owner_usernames):
+            self.stdout.write(self.style.WARNING("Initial data skipped: store owner accounts already exist."))
             return
 
         fixture_path = settings.BASE_DIR / "fixtures" / "initial_data.json"
