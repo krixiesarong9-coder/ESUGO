@@ -2,7 +2,7 @@ services:
   - type: web
     name: esugo
     runtime: python
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py reset_store_owners && python manage.py load_initial_data_once && python manage.py create_admin_once
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py load_initial_data_once && python manage.py create_admin_once
     startCommand: gunicorn Esugo.wsgi:application
     envVars:
       - key: DEBUG
