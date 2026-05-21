@@ -30,8 +30,8 @@ def is_main_store_owner(user):
 def home(request):
     """Home page with featured products and categories"""
     categories = Category.objects.annotate(product_count=Count('products'))[:6]
-    featured_products = Product.objects.filter(is_available=True, stock__gt=0)[:8]
-    fresh_arrivals = Product.objects.filter(is_available=True).order_by('-created_at')[:6]
+    featured_products = Product.objects.filter(is_available=True, stock__gt=0).select_related('category', 'owner')[:8]
+    fresh_arrivals = Product.objects.filter(is_available=True).select_related('category', 'owner').order_by('-created_at')[:6]
 
     context = {
         'categories': categories,
@@ -113,7 +113,7 @@ def product_list(request, category_slug=None):
         messages.info(request, 'Please choose a store before viewing products.')
         return redirect('store_list')
 
-    products = Product.objects.filter(is_available=True, owner=selected_store.owner)
+    products = Product.objects.filter(is_available=True, owner=selected_store.owner).select_related('category')
 
     # Filter by category
     if category_slug:
@@ -314,13 +314,15 @@ def cart_view(request):
         messages.warning(request, 'Please login to view your cart.')
         return redirect('login')
 
-    cart = Cart.objects.filter(user=request.user).first()
-    cart_items = cart.items.all() if cart else []
+    cart = Cart.objects.filter(user=request.user).prefetch_related(
+        'items__product__owner', 'items__product__category'
+    ).first()
+    cart_items = list(cart.items.all()) if cart else []
     checkout_block_reason = ''
     if cart:
         store_owners = {
             item.product.owner
-            for item in cart.items.select_related('product__owner').all()
+            for item in cart_items
             if item.product.owner
         }
         if not store_owners and cart.items.exists():
@@ -472,7 +474,7 @@ def order_history(request):
     if profile.user_type == 'rider':
         return redirect('rider_dashboard')
 
-    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    orders = Order.objects.filter(user=request.user).select_related('store_owner').prefetch_related('items__product').order_by('-created_at')
 
     context = {
         'orders': orders,
@@ -702,8 +704,16 @@ def store_owner_dashboard(request):
         product_filter_label = 'Out of Stock Products'
 
     products = filtered_products.select_related('category').order_by('-created_at')
-    low_stock_count = owner_products.filter(stock__lt=10, stock__gt=0, is_available=True).count()
-    out_of_stock_count = owner_products.filter(stock=0, is_available=True).count()
+
+    # All counts in one query
+    product_counts = owner_products.aggregate(
+        total=Count('id'),
+        available=Count('id', filter=Q(is_available=True)),
+        low_stock=Count('id', filter=Q(stock__lt=10, stock__gt=0, is_available=True)),
+        out_of_stock=Count('id', filter=Q(stock=0, is_available=True)),
+    )
+    low_stock_count = product_counts['low_stock']
+    out_of_stock_count = product_counts['out_of_stock']
 
     store_orders = Order.objects.filter(store_owner=request.user)
     store_orders = store_orders.select_related('user', 'store_owner').prefetch_related('items__product')
@@ -725,8 +735,8 @@ def store_owner_dashboard(request):
         'active_tab': active_tab,
         'product_filter': product_filter,
         'product_filter_label': product_filter_label,
-        'total_products': owner_products.count(),
-        'available_products': owner_products.filter(is_available=True).count(),
+        'total_products': product_counts['total'],
+        'available_products': product_counts['available'],
         'low_stock_count': low_stock_count,
         'out_of_stock_count': out_of_stock_count,
         'recent_products': products,
@@ -826,34 +836,37 @@ def admin_dashboard(request):
         messages.error(request, 'You do not have permission to access the admin dashboard.')
         return redirect('home')
     
-    # Get dashboard statistics
-    total_orders = Order.objects.count()
-    pending_orders = Order.objects.filter(status='pending').count()
-    confirmed_orders = Order.objects.filter(status='confirmed').count()
-    preparing_orders = Order.objects.filter(status='preparing').count()
-    out_for_delivery_orders = Order.objects.filter(status='out_for_delivery').count()
-    delivered_orders = Order.objects.filter(status='delivered').count()
-    cancelled_orders = Order.objects.filter(status='cancelled').count()
-    
-    # Revenue statistics
-    total_revenue = Order.objects.filter(payment_status='paid').aggregate(total=models.Sum('total_amount'))['total'] or 0
-    pending_revenue = Order.objects.filter(payment_status='pending').aggregate(total=models.Sum('total_amount'))['total'] or 0
-    
-    # Customer and product statistics
+    # All counts and revenue in two queries
+    order_stats = Order.objects.aggregate(
+        total_orders=Count('id'),
+        pending_orders=Count('id', filter=Q(status='pending')),
+        confirmed_orders=Count('id', filter=Q(status='confirmed')),
+        preparing_orders=Count('id', filter=Q(status='preparing')),
+        out_for_delivery_orders=Count('id', filter=Q(status='out_for_delivery')),
+        delivered_orders=Count('id', filter=Q(status='delivered')),
+        cancelled_orders=Count('id', filter=Q(status='cancelled')),
+        total_revenue=models.Sum('total_amount', filter=Q(payment_status='paid')),
+        pending_revenue=models.Sum('total_amount', filter=Q(payment_status='pending')),
+    )
+    total_orders = order_stats['total_orders']
+    pending_orders = order_stats['pending_orders']
+    confirmed_orders = order_stats['confirmed_orders']
+    preparing_orders = order_stats['preparing_orders']
+    out_for_delivery_orders = order_stats['out_for_delivery_orders']
+    delivered_orders = order_stats['delivered_orders']
+    cancelled_orders = order_stats['cancelled_orders']
+    total_revenue = order_stats['total_revenue'] or 0
+    pending_revenue = order_stats['pending_revenue'] or 0
+
+    product_stats = Product.objects.filter(is_available=True).aggregate(
+        total_products=Count('id'),
+        low_stock_products=Count('id', filter=Q(stock__lt=10, stock__gt=0)),
+        out_of_stock_products=Count('id', filter=Q(stock=0)),
+    )
     total_customers = Profile.objects.filter(user_type='customer', user__is_staff=False).count()
-    total_products = Product.objects.filter(is_available=True).count()
-    low_stock_products = Product.objects.filter(stock__lt=10, stock__gt=0, is_available=True).count()
-    out_of_stock_products = Product.objects.filter(stock=0, is_available=True).count()
-    
-    # Recent orders
     recent_orders = Order.objects.select_related('user').order_by('-created_at')[:10]
-    
-    # Top selling products
-    top_products = Product.objects.annotate(
-        total_sold=Count('orderitem')
-    ).order_by('-total_sold')[:5]
-    
-    # Orders by status for chart
+    top_products = Product.objects.annotate(total_sold=Count('orderitem')).order_by('-total_sold')[:5]
+
     status_counts = {
         'pending': pending_orders,
         'confirmed': confirmed_orders,
@@ -862,7 +875,7 @@ def admin_dashboard(request):
         'delivered': delivered_orders,
         'cancelled': cancelled_orders,
     }
-    
+
     context = {
         'total_orders': total_orders,
         'pending_orders': pending_orders,
@@ -874,9 +887,9 @@ def admin_dashboard(request):
         'total_revenue': total_revenue,
         'pending_revenue': pending_revenue,
         'total_customers': total_customers,
-        'total_products': total_products,
-        'low_stock_products': low_stock_products,
-        'out_of_stock_products': out_of_stock_products,
+        'total_products': product_stats['total_products'],
+        'low_stock_products': product_stats['low_stock_products'],
+        'out_of_stock_products': product_stats['out_of_stock_products'],
         'recent_orders': recent_orders,
         'top_products': top_products,
         'status_counts': status_counts,
@@ -947,20 +960,22 @@ def customer_dashboard(request):
     """Customer dashboard for customers"""
     profile, created = Profile.objects.get_or_create(user=request.user)
     
-    # Get customer's orders
-    customer_orders = Order.objects.filter(user=request.user).order_by('-created_at')
-    
-    # Order statistics
-    total_orders = customer_orders.count()
-    pending_orders = customer_orders.filter(status__in=['pending', 'confirmed', 'preparing']).count()
-    completed_orders = customer_orders.filter(status='delivered').count()
-    cancelled_orders = customer_orders.filter(status='cancelled').count()
-    
-    # Total spent
-    total_spent = customer_orders.filter(payment_status='paid').aggregate(total=models.Sum('total_amount'))['total'] or 0
-    
-    # Recent orders
-    recent_orders = customer_orders[:5]
+    customer_orders = Order.objects.filter(user=request.user)
+
+    order_stats = customer_orders.aggregate(
+        total_orders=Count('id'),
+        pending_orders=Count('id', filter=Q(status__in=['pending', 'confirmed', 'preparing'])),
+        completed_orders=Count('id', filter=Q(status='delivered')),
+        cancelled_orders=Count('id', filter=Q(status='cancelled')),
+        total_spent=models.Sum('total_amount', filter=Q(payment_status='paid')),
+    )
+    total_orders = order_stats['total_orders']
+    pending_orders = order_stats['pending_orders']
+    completed_orders = order_stats['completed_orders']
+    cancelled_orders = order_stats['cancelled_orders']
+    total_spent = order_stats['total_spent'] or 0
+
+    recent_orders = customer_orders.order_by('-created_at')[:5]
     
     # Get cart info
     cart = Cart.objects.filter(user=request.user).first()
@@ -988,20 +1003,17 @@ def rider_dashboard(request):
         messages.error(request, 'You do not have permission to access the rider dashboard.')
         return redirect('home')
     
-    # Get orders assigned to this rider
     my_orders = Order.objects.filter(rider=request.user).select_related('user').order_by('-created_at')
-    
-    # Rider statistics
-    total_deliveries = Order.objects.filter(rider=request.user, status='delivered').count()
-    pending_deliveries = my_orders.filter(status__in=['pending', 'confirmed', 'preparing', 'out_for_delivery']).count()
-    completed_today = Order.objects.filter(
-        rider=request.user,
-        status='delivered',
-        delivered_at__date=timezone.now().date()
-    ).count()
-    
-    # Earnings (could be customized based on delivery fees)
-    total_earnings = total_deliveries * 50  # Example: 50 pesos per delivery
+
+    rider_stats = Order.objects.filter(rider=request.user).aggregate(
+        total_deliveries=Count('id', filter=Q(status='delivered')),
+        pending_deliveries=Count('id', filter=Q(status__in=['pending', 'confirmed', 'preparing', 'out_for_delivery'])),
+        completed_today=Count('id', filter=Q(status='delivered', delivered_at__date=timezone.now().date())),
+    )
+    total_deliveries = rider_stats['total_deliveries']
+    pending_deliveries = rider_stats['pending_deliveries']
+    completed_today = rider_stats['completed_today']
+    total_earnings = total_deliveries * 50
     
     context = {
         'total_deliveries': total_deliveries,

@@ -35,6 +35,11 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['name']
+        indexes = [
+            models.Index(fields=['is_available', 'stock']),
+            models.Index(fields=['owner', 'is_available']),
+            models.Index(fields=['category', 'is_available']),
+        ]
 
     def __str__(self):
         return self.name
@@ -58,6 +63,9 @@ class StoreSettings(models.Model):
     class Meta:
         verbose_name = "Store Settings"
         verbose_name_plural = "Store Settings"
+        indexes = [
+            models.Index(fields=['owner']),
+        ]
 
     def __str__(self):
         return f'{self.store_name} settings'
@@ -79,6 +87,11 @@ class Profile(models.Model):
     postal_code = models.CharField(max_length=10, blank=True)
     user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES, default='customer')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['user_type']),
+        ]
 
     def __str__(self):
         return f'{self.user.username} ({self.get_user_type_display()})'
@@ -150,6 +163,13 @@ class Order(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['status']),
+            models.Index(fields=['payment_status']),
+            models.Index(fields=['user', '-created_at']),
+            models.Index(fields=['store_owner', 'status']),
+            models.Index(fields=['rider', 'status']),
+        ]
 
     def __str__(self):
         return f'Order {self.order_number}'
