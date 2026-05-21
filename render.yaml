@@ -17,6 +17,10 @@ services:
         fromDatabase:
           name: esugo-db
           property: connectionString
+      - key: PAYMONGO_SECRET_KEY
+        sync: false
+      - key: PAYMONGO_PUBLIC_KEY
+        sync: false
 
 databases:
   - name: esugo-db

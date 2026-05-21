@@ -166,7 +166,7 @@ def store_list(request):
         messages.error(request, 'Only customers can choose a preferred store.')
         return redirect('home')
 
-    stores = StoreSettings.objects.all()
+    stores = StoreSettings.objects.select_related('owner').filter(
         owner__profile__user_type='store_owner'
     ).exclude(
         store_name__icontains='Esugo'
@@ -267,7 +267,7 @@ def add_to_cart(request, product_id):
     cart_item.save()
 
     messages.success(request, f'{quantity} {product.name} added to cart!')
-    return redirect('product_detail', category_slug=product.category.slug, slug=product.slug)
+    return redirect('cart')
 
 
 def remove_from_cart(request, product_id):
