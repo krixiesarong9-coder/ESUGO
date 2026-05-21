@@ -769,7 +769,8 @@ def store_owner_update_order(request, order_number):
         return redirect('home')
 
     order = get_object_or_404(Order, order_number=order_number)
-    if order.store_owner != request.user:
+    main_store_owner = is_main_store_owner(request.user)
+    if order.store_owner != request.user and not main_store_owner:
         messages.error(request, 'You can only update orders assigned to your store.')
         return redirect('store_owner_dashboard')
 
