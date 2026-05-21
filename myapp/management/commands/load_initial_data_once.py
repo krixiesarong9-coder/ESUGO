@@ -32,18 +32,20 @@ class Command(BaseCommand):
             if username not in self.store_owner_usernames:
                 continue
 
-            user, _ = User.objects.update_or_create(
+            user, created = User.objects.get_or_create(
                 username=username,
                 defaults={
-                    "password": fields["password"],
                     "first_name": fields["first_name"],
                     "last_name": fields["last_name"],
-                    "email": fields["email"],
-                    "is_staff": fields["is_staff"],
-                    "is_superuser": fields["is_superuser"],
-                    "is_active": fields["is_active"],
+                    "email": "",
+                    "is_staff": False,
+                    "is_superuser": False,
+                    "is_active": True,
                 },
             )
+            if created:
+                user.set_unusable_password()
+                user.save()
             users[username] = user
 
         for username, user in users.items():
