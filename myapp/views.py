@@ -715,7 +715,12 @@ def store_owner_dashboard(request):
     low_stock_count = product_counts['low_stock']
     out_of_stock_count = product_counts['out_of_stock']
 
-    store_orders = Order.objects.filter(store_owner=request.user)
+    if main_store_owner:
+        store_orders = Order.objects.filter(
+            store_owner__profile__user_type='store_owner'
+        ).exclude(store_owner__store_settings__store_name__icontains='Esugo')
+    else:
+        store_orders = Order.objects.filter(store_owner=request.user)
     store_orders = store_orders.select_related('user', 'store_owner').prefetch_related('items__product')
     pending_store_orders = store_orders.filter(status='pending').order_by('-created_at')
     recent_store_orders = store_orders.order_by('-created_at')[:8]
